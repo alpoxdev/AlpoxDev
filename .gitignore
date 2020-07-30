@@ -1,0 +1,13 @@
+# alpoxdev-client
+alpoxdev-client/node_modules
+alpoxdev-client/.next
+alpoxdev-client/.serverless
+alpoxdev-client/serverless.yml
+
+# alpoxdev-api
+alpoxdev-api/node_modules/
+alpoxdev-api/dist/
+alpoxdev-api/.serverless/
+alpoxdev-api/ormconfig.js
+alpoxdev-api/src/config/
+

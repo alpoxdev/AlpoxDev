@@ -1,0 +1,42 @@
+service: alpoxdev-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: us-east-1
+
+plugins:
+  - serverless-offline
+  - serverless-domain-manager
+
+functions:
+  index:
+    handler: dist/app.handler
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
+
+package:
+  exclude:
+    - src/**
+    - scripts/**
+    - .serverless/**
+    - node_modules/**/*.md
+    - node_modules/**/bin/**
+    - node_modules/**/*.ts
+    - tests/**
+  excludeDevDependencies: true
+    
+  include:
+    - dist/**
+    - ormconfig.js
+    - node_modules/**/*.js
+
+custom:
+  customDomain:
+    domainName: api.alpoxdev.com
+    certificateName: "*.alpoxdev.com"
+    certificateArn: "arn:aws:acm:us-east-1:639879184392:certificate/bb52e5ff-638e-4689-8975-cab5b10c58c2"
+    createRoute53Record: true
+    basePath: ''
