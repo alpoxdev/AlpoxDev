@@ -1,0 +1,54 @@
+service: apick-client
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    stage: prod
+    region: us-east-1
+
+plugins:
+    - serverless-offline
+    - serverless-domain-manager
+
+functions:
+    index:
+        handler: server.handler
+        events:
+            - http: ANY /
+            - http: ANY /{proxy+}
+
+package:
+    exclude:
+        - src/**
+        - scripts/**
+        - .serverless/**
+        - node_modules/**/*.md
+        - node_modules/**/bin/**
+        - node_modules/react/**
+        - node_modules/react-dom/**
+        - node_modules/next/**
+        - node_modules/prismjs/**
+        - node_modules/mobx/**
+        - node_modules/mobx-react/**
+        - node_modules/axios/**
+        - node_modules/classnames/**
+        - node_modules/react-slick/**
+        - node_modules/react-typed/**
+        - node_modules/sass/**
+        - node_modules/styled-components/**
+        - node_modules/typed.js/**
+        - node_modules/disqus-react/**
+    excludeDevDependencies: true
+
+    include:
+        - .next/**
+        - public/**
+        - server.js
+
+custom:
+    customDomain:
+        domainName: nextjs.alpoxdev.com
+        certificateName: '*.alpoxdev.com'
+        certificateArn: ''
+        createRoute53Record: true
+        basePath: ''
