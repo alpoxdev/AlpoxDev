@@ -1,0 +1,5 @@
+{
+	"secret": "alpoxdev-api@123",
+	"issuer": "alpoxdev",
+	"expiresIn" : "1d"
+}
