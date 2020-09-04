@@ -12,13 +12,7 @@ const SOCIAL_PENDING = 'social/PENDING';
 const SOCIAL_SUCCESS = 'social/SUCCESS';
 const SOCIAL_FAILURE = 'social/FAILURE';
 
-export const onSocial = ({
-    socialType = 'google',
-    socialId,
-    email = null,
-    nickname = null,
-    profile = null,
-}) => {
+export const onSocial = ({ socialType = 'google', socialId, email = null, nickname = null, profile = null }) => {
     return async (dispatch, getState) => {
         const url = 'https://api.apick.kr/auth/social';
         const params = { socialId, socialType };

@@ -23,3 +23,9 @@ export const postDetailHelmet = (title) => {
         title: `${title} - AlpoxDev`,
     };
 };
+
+export const tagDetailHelmet = (tag) => {
+    return {
+        title: `${tag} - AlpoxDev`,
+    };
+};

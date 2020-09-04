@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { createWrapper } from 'next-redux-wrapper';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { fromJS } from 'immutable';
 
 import logger from 'redux-logger';
@@ -7,20 +7,34 @@ import ReduxThunk from 'redux-thunk';
 import immutableTransform from 'redux-persist-transform-immutable';
 
 import ui from './ui';
-import helmet from './helmet';
 import login from './login';
 import register from './register';
 import social from './social';
 import user from './user';
+import post from './post';
+import tag from './tag';
 
-const reducers = combineReducers({
-    helmet,
+const combinedReducers = combineReducers({
+    ui,
     login,
     register,
     social,
     user,
-    ui,
+    post,
+    tag,
 });
+
+const reducers = (state, action) => {
+    if (action?.type === HYDRATE) {
+        // console.log(state);
+        // console.log(action.payload.tag.toJS());
+        for (const [key, value] of Object.entries(action.payload)) {
+            state[key] = value;
+        }
+        return combinedReducers(state, action);
+    }
+    return combinedReducers(state, action);
+};
 
 const bindMiddleware = (middleware) => {
     if (process.env.NODE_ENV === 'development') {
@@ -56,7 +70,7 @@ export const wrapper = createWrapper(makeStore, {
     serializeState: (state) => {
         const serialized = [];
         for (const [key, value] of Object.entries(state)) {
-            serialized.key = value ? value.toJS() : value;
+            serialized[key] = value ? value.toJS() : value;
         }
 
         return serialized;
@@ -64,7 +78,7 @@ export const wrapper = createWrapper(makeStore, {
     deserializeState: (state) => {
         const deserialized = [];
         for (const [key, value] of Object.entries(state)) {
-            deserialized.key = value ? fromJS(value) : value;
+            deserialized[key] = value ? fromJS(value) : value;
         }
 
         return deserialized;
