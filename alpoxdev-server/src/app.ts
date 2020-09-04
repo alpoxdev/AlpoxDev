@@ -64,7 +64,7 @@ export default class App {
                 const {
                     status = 500,
                     route = '',
-                    message = 'Server Internal Error'
+                    message = 'Server Internal Error',
                 } = err;
 
                 res.status(status || 500).json({ route, message });
