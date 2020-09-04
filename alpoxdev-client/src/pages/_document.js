@@ -70,6 +70,11 @@ export default class MyDocument extends Document {
                         `,
                         }}
                     />
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.css" />
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,700&family=Noto+Serif+KR:wght@700&display=swap"
+                        rel="stylesheet"
+                    />
                 </Head>
                 <body {...this.helmetBodyAttrComponents}>
                     <Main />

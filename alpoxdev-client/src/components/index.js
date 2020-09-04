@@ -9,3 +9,4 @@ export * from './Loading';
 export * from './Main';
 export * from './Auth';
 export * from './User';
+export * from './Post';
