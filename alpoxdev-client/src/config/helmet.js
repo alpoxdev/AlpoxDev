@@ -23,6 +23,10 @@ export const postDetailHelmet = (title, url) => ({
     url,
 });
 
+export const tagListHelmet = {
+    title : '태그 목록 - AlpoxDev'
+}
+
 export const tagDetailHelmet = (tag) => ({
     title: `${tag} - AlpoxDev`,
 });

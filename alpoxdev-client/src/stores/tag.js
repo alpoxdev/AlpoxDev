@@ -41,8 +41,20 @@ export const onGetTags = () => {
     };
 };
 
-export const onGetTag = () => {
-    return async (dispatch, getState) => {};
+export const onGetTag = (id) => {
+    return async (dispatch, getState) => {
+        console.log(`태그 자세히 불러오는중... | ${id}`);
+        dispatch({ type : TAG_PENDING });
+
+        const url = `https://api.alpox.kr/tags/${id}`;
+        const { status, data } = await Request.onRequestGet({ url });
+
+        if(status === 200){
+            dispatch({ type : TAG_SUCCESS, payload : data.tag });
+        }else{
+            dispatch({ type : TAG_FAILURE, payload : { status, data }});
+        }
+    };
 };
 
 export default handleActions(

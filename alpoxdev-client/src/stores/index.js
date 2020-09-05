@@ -41,7 +41,7 @@ const bindMiddleware = (middleware) => {
         const { composeWithDevTools } = require('redux-devtools-extension');
         return composeWithDevTools(applyMiddleware(...middleware));
     }
-    return applyMiddleware(...middleware);
+    return applyMiddleware(ReduxThunk);
 };
 
 const makeStore = ({ isServer = typeof window === 'undefined' }) => {

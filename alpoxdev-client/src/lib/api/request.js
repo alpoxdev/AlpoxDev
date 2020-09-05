@@ -4,7 +4,7 @@ export default class Request {
     static onError(error) {
         if (error.response) {
             // 반응은 왔지만 에러 발생
-            console.log(error.response);
+            console.log(error.response.status, error.response.data);
 
             const { status, data } = error?.response;
             return { status, data };
