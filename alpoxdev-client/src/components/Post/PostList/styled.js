@@ -116,3 +116,13 @@ export const PostCreatedAt = styled(Text)`
     font-size: 0.85rem;
     color: ${(props) => props.theme.textInfoColor};
 `;
+
+export const PostLoading = styled.div`
+    width : 100%;
+    height : 75px;
+    background-color : ${props=>props.theme.primaryColor};
+    
+    display : flex;
+    align-items : center;
+    justify-content : center;
+`;

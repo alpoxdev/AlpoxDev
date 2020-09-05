@@ -8,47 +8,19 @@ import * as userActions from 'stores/user';
 import * as uiActions from 'stores/ui';
 import * as styled from './styled';
 
-// components
-import Profile from './Profile';
-import Dropdown from './Dropdown';
+// styles
+import { useScrollFadeIn } from 'lib/hooks';
 
-function Header({ userState, uiState, uiActions }) {
-    const { user } = userState;
-    const {
-        header: { dropdown },
-    } = uiState;
-    const { setDropdown } = uiActions;
+function Header() {
+    const scrollFadIn = useScrollFadeIn();
 
-    return (
-        <styled.HeaderWrapper>
+    return (    
+        <styled.HeaderWrapper {...scrollFadIn}>
             <styled.Header>
-                <styled.LeftWrapper>
-                    <Link href="/">
-                        <styled.Logo>TAPMATH</styled.Logo>
-                    </Link>
-                </styled.LeftWrapper>
-                <styled.RightWrapper>
-                    {user && (
-                        <Profile
-                            user={user}
-                            onClick={() => setDropdown(!dropdown)}
-                        />
-                    )}
-                    {!user && (
-                        <styled.AuthTap>
-                            <Link href="/auth">
-                                <styled.LoginButton>로그인</styled.LoginButton>
-                            </Link>
-                            <Link href="/auth/register">
-                                <styled.RegisterButton>
-                                    회원가입
-                                </styled.RegisterButton>
-                            </Link>
-                        </styled.AuthTap>
-                    )}
-                </styled.RightWrapper>
+                <styled.HeaderLogo>
+                    AlpoxDev
+                </styled.HeaderLogo>
             </styled.Header>
-            {dropdown && <Dropdown onClick={() => setDropdown(!dropdown)} />}
         </styled.HeaderWrapper>
     );
 }

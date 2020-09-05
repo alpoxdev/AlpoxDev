@@ -1,8 +1,7 @@
 {
     "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
+       {"H"a:er } true,component        "es6": true,
+       *"ds styl"d ue./styld
     },
     "parser": "babel-eslint",
     "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb", "plugin:prettier/recommended"],
@@ -43,7 +42,8 @@
         "react/no-danger": 0,
         "jsx-a11y/html-has-lang": 0,
         "no-restricted-syntax": 0,
-        "no-console": 0
+        "no-console": 0,
+        "import/order":0 
     },
     "globals": {
         "React": "writable"

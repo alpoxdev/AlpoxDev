@@ -8,6 +8,9 @@ const initialState = Map({
         pending: false,
         error: null,
         posts: List([]),
+        page : 0,
+        offset : 20,
+        more : true
     }),
     post: Map({
         pending: false,
@@ -17,6 +20,7 @@ const initialState = Map({
 });
 
 const SET_POST_STATE = 'post/SET_POST_STATE';
+const SET_POST_MORE = 'post/SET_POST_MORE';
 const POSTS_PENDING = 'post/POSTS_PENDING';
 const POSTS_SUCCESS = 'post/POSTS_SUCCESS';
 const POSTS_FAILURE = 'post/POSTS_FAILURE';
@@ -25,9 +29,13 @@ const POST_SUCCESS = 'post/POST_SUCCESS';
 const POST_FAILURE = 'post/POST_FAILURE';
 
 export const setPostState = createAction(SET_POST_STATE);
+export const setPostMore = createAction(SET_POST_MORE);
 
-export const onGetPosts = (page = 0, offset = 20) => {
+export const onGetPosts = () => {
     return async (dispatch, getState) => {
+        const { pending, page, offset, more } = getState().post?.toJS().posts;
+        if(!more || pending) return;
+
         console.log(`글 목록을 불러오는중...`);
 
         dispatch({ type: POSTS_PENDING });
@@ -37,7 +45,11 @@ export const onGetPosts = (page = 0, offset = 20) => {
 
         const { status, data } = await Request.onRequestGet({ url, query });
         if (status === 200) {
-            dispatch({ type: POSTS_SUCCESS, payload: data.posts });
+            const { posts } = data;
+            dispatch({ type: POSTS_SUCCESS, payload: { posts, page : page + 1 } });
+            if(posts.length === 0 || posts.length === offset){
+                dispatch({ type : SET_POST_MORE, payload : false});
+            }
         } else {
             dispatch({ type: POSTS_FAILURE, payload: { status, data } });
         }
@@ -67,11 +79,13 @@ export default handleActions(
             return state.setIn(['posts', 'pending'], true).setIn(['posts', 'error'], null);
         },
         [POSTS_SUCCESS]: (state, action) => {
-            const posts = action.payload;
+            const { posts, page } = action?.payload;
+
             return state
                 .setIn(['posts', 'posts'], state.getIn(['posts', 'posts']).push(...posts))
                 .setIn(['posts', 'pending'], false)
-                .setIn(['posts', 'error'], null);
+                .setIn(['posts', 'error'], null)
+                .setIn(['posts', 'page'], page);
         },
         [POSTS_FAILURE]: (state, action) => {
             const error = action?.payload;
@@ -92,6 +106,10 @@ export default handleActions(
             const state = action?.payload;
             return state;
         },
+        [SET_POST_MORE] : (state, action) => {
+            const more = action?.payload || true;
+            return state.setIn(['posts', 'more'], more);
+        }
     },
     initialState,
 );

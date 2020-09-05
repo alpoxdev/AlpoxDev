@@ -12,8 +12,9 @@ function IndexContainer({ postState, postActions }) {
     const {
         posts: { posts, pending, error },
     } = postState;
+    const { onGetPosts } = postActions;
 
-    return <>{pending ? <SkeletonPostList /> : <PostList posts={posts} />}</>;
+    return <><PostList pending={pending} posts={posts} getPosts={onGetPosts}/></>;
 }
 
 export default connect(

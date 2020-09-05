@@ -1,19 +1,31 @@
 import React from 'react';
 import Link from 'next/link';
-import { markdownRemoval, parseTimestamp } from 'lib/utils';
 import * as styled from './styled';
 
-export default function PostList({ posts = [] }) {
-    const postList = posts.map((post) => {
-        return <PostItem key={post.id} post={post} />;
+import PostLoading from './PostLoading';
+import { markdownRemoval, parseTimestamp } from 'lib/utils';
+import { useScrollBottom } from 'lib/hooks';
+
+
+export default function PostList({ pending = false, posts = [], getPosts }) {
+    const postLength = posts?.length;
+    const postList = posts.map((post, index) => {
+        return <PostItem key={index} post={post} useScrollBottom={postLength === (index + 4) ? ()=>useScrollBottom(getPosts) : null}/>;
     });
-    return <styled.PostList>{postList}</styled.PostList>;
+    return (
+        <>
+            <styled.PostList>{postList}</styled.PostList>
+            <PostLoading pending={pending}/>
+        </>
+    );
 }
 
-function PostItem({ post = null }) {
+function PostItem({ post = null, useScrollBottom }) {
+    const isScrollBottom = useScrollBottom && useScrollBottom();
+
     return (
         <Link href="/posts/[id]" as={`/posts/${post.id}`}>
-            <styled.PostItem>
+            <styled.PostItem {...isScrollBottom}>
                 {post.thumbnail ? <styled.Thumbnail alt={post.title} src={post.thumbnail} /> : <styled.TempThumbnail />}
 
                 <styled.PostContent isThumbnail={post.thumbnail ? 'true' : ''}>

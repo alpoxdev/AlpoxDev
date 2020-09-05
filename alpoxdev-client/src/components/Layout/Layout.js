@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import * as styled from './styled';
 
+import { Header } from 'components';
+
 function Layout({ children }) {
     return (
         <>
@@ -14,6 +16,7 @@ function Layout({ children }) {
             </Head>
 
             <styled.LayoutWrapper>
+                <Header/>
                 <styled.Layout>{children}</styled.Layout>
             </styled.LayoutWrapper>
         </>

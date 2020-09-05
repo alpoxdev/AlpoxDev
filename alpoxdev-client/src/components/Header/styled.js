@@ -31,82 +31,15 @@ export const Header = styled.div`
     }
 `;
 
-export const LeftWrapper = styled.div``;
-
-export const Logo = styled(Header1)`
+export const HeaderLogo = styled(Header)`
+    margin-left: 15px;
+    font-family: ${(props) => props.theme.logoFont};
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.65px;
     cursor: pointer;
-`;
-
-export const RightWrapper = styled.div`
-    margin-left: auto;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-`;
-
-export const AuthTap = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-`;
-
-export const LoginButton = styled(Text)`
-    margin-right: 15px;
-    cursor: pointer;
-
-    &:hover {
-        text-decoration: underline;
+    
+    @media (min-width: 1520px) {
+        display: none;
     }
 `;
-
-export const RegisterButton = styled(Text)`
-    cursor: pointer;
-
-    &:hover {
-        text-decoration: underline;
-    }
-`;
-
-export const Profile = styled.div``;
-
-export const ProfileImage = styled.img`
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-
-    margin-top: 3.5px;
-    cursor: pointer;
-`;
-
-export const DropdownButton = styled.img``;
-
-export const Dropdown = styled.div`
-    width: 150px;
-
-    position: absolute;
-    top: 64px;
-    right: 0;
-    z-index: 2;
-
-    border-radius: 4px;
-    background-color: #fff;
-
-    @media (min-width: 768px) {
-        right: calc(50% - 330px);
-    }
-
-    @media (min-width: 1200px) {
-        right: calc(50% - 550px);
-    }
-`;
-
-export const DropdownItem = styled.div`
-    width: 100%;
-    padding: 12px 18px;
-
-    border-top: 1px solid #eee;
-    cursor: pointer;
-`;
-
-export const DropdownItemText = styled(Text)``;
