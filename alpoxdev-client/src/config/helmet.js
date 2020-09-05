@@ -1,7 +1,7 @@
 export const defaultHelmet = {
     title: 'AlpoxDev',
     description: 'AlpoxDev Tech Blog',
-    image: '',
+    image: 'https://alpox.kr/logo.png',
     keywords: ['React.js', 'Node.js', 'Web', 'App', 'Server', 'html', 'css', 'javascript'].join(' '),
     url: 'https://alpox.kr',
 };

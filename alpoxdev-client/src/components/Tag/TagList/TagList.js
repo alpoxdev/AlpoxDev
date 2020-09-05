@@ -23,7 +23,7 @@ export function TagItem({ tag = null }){
                 </styled.TopWrapper>
                 <styled.BottomWrapper>
                     <styled.Description>{tag.description}</styled.Description>
-                    <styled.PostCount>{tag.postCount}개의 포스팅</styled.PostCount>
+                    <styled.PostCount>{tag.posts}개의 포스팅</styled.PostCount>
                 </styled.BottomWrapper>
             </styled.TagItem>
         </Link>
