@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { defaultHelmet } from 'config';
 
 export default function Helmet({ helmet = defaultHelmet }) {
+    console.log(helmet);
     const {
         title = helmet.title || defaultHelmet.title,
         description = helmet.description || defaultHelmet.description,

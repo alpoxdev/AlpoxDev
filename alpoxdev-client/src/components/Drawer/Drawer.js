@@ -21,7 +21,6 @@ export const menus = [
 ];
 
 export default function Drawer({ tags = [], active }) {
-    console.log(active);
     return (
         <styled.Drawer>
             <Link href="/" as="/">

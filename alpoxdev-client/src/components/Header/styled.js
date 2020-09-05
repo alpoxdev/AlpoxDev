@@ -30,6 +30,7 @@ export const Header = styled.div`
 
     @media (min-width: 992px) {
         width: 960px;
+        padding : 0 1rem;
     }
     @media (min-width: 1200px) {
         width: 1140px;

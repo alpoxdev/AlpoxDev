@@ -17,9 +17,11 @@ function Header() {
     return (    
         <styled.HeaderWrapper {...scrollFadIn}>
             <styled.Header>
-                <styled.HeaderLogo>
-                    AlpoxDev
-                </styled.HeaderLogo>
+                <Link href ="/" as="/">
+                    <styled.HeaderLogo>
+                        AlpoxDev
+                    </styled.HeaderLogo>
+                </Link>
             </styled.Header>
         </styled.HeaderWrapper>
     );

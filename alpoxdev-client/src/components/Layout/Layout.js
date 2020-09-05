@@ -10,7 +10,6 @@ import { Header, Drawer } from 'components';
 function Layout({ children, tagState, uiState }) {
     const { tags : { tags }} = tagState;
     const { drawer : { active }} = uiState;
-    console.log(tags.slice(0, 5));
 
     return (
         <>

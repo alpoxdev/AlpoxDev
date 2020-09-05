@@ -2,11 +2,19 @@ import Head from 'next/head';
 import { Helmet } from 'react-helmet';
 import { defaultHelmet } from 'config';
 
-export default function ReactHelmet({ helmet = null }) {
+export default function ReactHelmet({ helmet = defaultHelmet }) {
+    const {
+        title = helmet?.title || defaultHelmet.title,
+        description = helmet?.description || defaultHelmet.description,
+        image = helmet?.image || defaultHelmet.image,
+        keywords = helmet?.keywords || defaultHelmet.keywords,
+        url = helmet?.url || defaultHelmet.url,
+    } = helmet;
+
     return (
         <Helmet
             htmlAttributes={{ lang: 'ko' }}
-            title={helmet?.title ?? defaultHelmet.title}
+            title={title}
             meta={[
                 {
                     name: 'viewport',
@@ -14,20 +22,20 @@ export default function ReactHelmet({ helmet = null }) {
                 },
                 {
                     name: 'keywords',
-                    content: helmet?.keywords ?? defaultHelmet.keywords,
+                    content: keywords
                 },
                 {
                     name: 'description',
-                    content: helmet?.description ?? defaultHelmet.description,
+                    content: description
                 },
-                { property: 'og:title', content: helmet?.title ?? defaultHelmet.title },
-                { property: 'og:description', content: helmet?.description ?? defaultHelmet.description },
-                { property: 'og:image', content: helmet?.image ?? defaultHelmet?.image },
-                { property: 'og:url', content: helmet?.url ?? defaultHelmet?.url },
+                { property: 'og:title', content: title },
+                { property: 'og:description', content: description },
+                { property: 'og:image', content: image },
+                { property: 'og:url', content: url },
 
-                { property: 'twitter:title', content: helmet?.title ?? defaultHelmet.title },
-                { property: 'twitter:description', content: helmet?.description ?? defaultHelmet.description },
-                { property: 'twitter:image', content: helmet?.image ?? defaultHelmet?.image },
+                { property: 'twitter:title', content: title },
+                { property: 'twitter:description', content: description },
+                { property: 'twitter:image', content: image },
             ]}
         />
     );

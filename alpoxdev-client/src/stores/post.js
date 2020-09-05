@@ -47,7 +47,6 @@ export const onGetPosts = () => {
         if (status === 200) {
             const { posts } = data;
             dispatch({ type: POSTS_SUCCESS, payload: { posts, page : page + 1 } });
-            console.log(posts.length);
             if(posts.length === 0 || posts.length < offset){
                 dispatch({ type : SET_POST_MORE, payload : false});
             }
@@ -97,7 +96,7 @@ export default handleActions(
         },
         [POST_SUCCESS]: (state, action) => {
             const post = action?.payload;
-            return state.setIn(['post', 'post'], post).setIn(['post', 'pending'], false).error(['post', 'error'], null);
+            return state.setIn(['post', 'post'], post).setIn(['post', 'pending'], false).setIn(['post', 'error'], null);
         },
         [POST_FAILURE]: (state, action) => {
             const error = action?.payload;
