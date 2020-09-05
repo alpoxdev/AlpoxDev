@@ -9,7 +9,7 @@ const initialState = Map({
         error: null,
         posts: List([]),
         page : 0,
-        offset : 20,
+        offset : 15,
         more : true
     }),
     post: Map({
@@ -47,7 +47,8 @@ export const onGetPosts = () => {
         if (status === 200) {
             const { posts } = data;
             dispatch({ type: POSTS_SUCCESS, payload: { posts, page : page + 1 } });
-            if(posts.length === 0 || posts.length === offset){
+            console.log(posts.length);
+            if(posts.length === 0 || posts.length < offset){
                 dispatch({ type : SET_POST_MORE, payload : false});
             }
         } else {

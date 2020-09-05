@@ -12,7 +12,6 @@ export const Layout = styled.div`
 
     margin: 0 auto;
     padding: 1rem;
-    padding-top: 64px;
 
     @media (min-width: 992px) {
         width: 960px;

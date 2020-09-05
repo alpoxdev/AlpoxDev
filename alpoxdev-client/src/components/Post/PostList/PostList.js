@@ -6,26 +6,36 @@ import PostLoading from './PostLoading';
 import { markdownRemoval, parseTimestamp } from 'lib/utils';
 import { useScrollBottom } from 'lib/hooks';
 
-
 export default function PostList({ pending = false, posts = [], getPosts }) {
     const postLength = posts?.length;
     const postList = posts.map((post, index) => {
-        return <PostItem key={index} post={post} useScrollBottom={postLength === (index + 4) ? ()=>useScrollBottom(getPosts) : null}/>;
+        return (
+            <PostItem
+                key={index}
+                post={post}
+                useScrollBottom={
+                    postLength === index + 4
+                        ? () => useScrollBottom(getPosts)
+                        : null
+                }
+            />
+        );
     });
+
+
     return (
         <>
             <styled.PostList>{postList}</styled.PostList>
-            <PostLoading pending={pending}/>
+            <PostLoading pending={pending} getPosts={getPosts}/>
         </>
     );
 }
 
-function PostItem({ post = null, useScrollBottom }) {
-    const isScrollBottom = useScrollBottom && useScrollBottom();
+function PostItem({ post = null}) {
 
     return (
         <Link href="/posts/[id]" as={`/posts/${post.id}`}>
-            <styled.PostItem {...isScrollBottom}>
+            <styled.PostItem>
                 {post.thumbnail ? <styled.Thumbnail alt={post.title} src={post.thumbnail} /> : <styled.TempThumbnail />}
 
                 <styled.PostContent isThumbnail={post.thumbnail ? 'true' : ''}>

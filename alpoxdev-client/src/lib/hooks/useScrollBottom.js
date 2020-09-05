@@ -1,20 +1,21 @@
 import { useRef, useEffect, useCallback } from 'react';
 
-const useScrollBottom = (getData, duration = 1, delay = 0) => {
+const useScrollBottom = (pending, getData, duration = 1, delay = 0) => {
   const element = useRef();
 
   const onScroll = useCallback(([entry])=>{
     if(entry.isIntersecting){
-      // console.log('마지막 element');
+      console.log('마지막 element');
       getData && getData();
+      
     }
-  },[delay, duration]);
+  },[pending, delay, duration]);
 
   useEffect(() => {
     let observer;
 
     if (element?.current) {
-      observer = new IntersectionObserver(onScroll, { threshold: 0.3 });
+      observer = new IntersectionObserver(onScroll, { threshold: [0, 1] });
       observer.observe(element.current);
     }
 

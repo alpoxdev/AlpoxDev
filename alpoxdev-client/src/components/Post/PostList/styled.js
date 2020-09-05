@@ -1,10 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Header, Text } from 'lib/styles';
 
 export const PostList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    padding-top: 45px;
+    padding-top: 65px;
+
+    @media (min-width: 1520px) {
+        padding-top : 100px;
+    }
 `;
 
 export const PostItem = styled.div`
@@ -117,12 +121,68 @@ export const PostCreatedAt = styled(Text)`
     color: ${(props) => props.theme.textInfoColor};
 `;
 
+const loadingFrames = keyframes`
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+`;
+
 export const PostLoading = styled.div`
     width : 100%;
-    height : 75px;
-    background-color : ${props=>props.theme.primaryColor};
+    height : 100px;
     
     display : flex;
     align-items : center;
     justify-content : center;
+`;
+
+export const Loading = styled.div`
+    font-size: 10px;
+    margin: 50px auto;
+    text-indent: -9999em;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #000;
+    background: -moz-linear-gradient(left, #6A63DD 10%, rgba(255, 255, 255, 0) 42%);
+    background: -webkit-linear-gradient(left, #6A63DD 10%, rgba(255, 255, 255, 0) 42%);
+    background: -o-linear-gradient(left, #6A63DD 10%, rgba(255, 255, 255, 0) 42%);
+    background: -ms-linear-gradient(left, #6A63DD 10%, rgba(255, 255, 255, 0) 42%);
+    background: linear-gradient(to right, #6A63DD 10%, rgba(255, 255, 255, 0) 42%);
+    position: relative;
+    -webkit-animation: ${loadingFrames} 1.4s infinite linear;
+    animation: ${loadingFrames} 1.4s infinite linear;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+
+    &::before{
+        width: 50%;
+        height: 50%;
+        background: #6A63DD;
+        border-radius: 100% 0 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+    }
+
+    &::after{
+        background: ${props=>props.theme.backgroundColor};
+        width: 75%;
+        height: 75%;
+        border-radius: 50%;
+        content: '';
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
 `;

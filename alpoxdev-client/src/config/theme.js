@@ -5,7 +5,7 @@ export const theme = {
 
     primaryColor: '#6A63DD',
     subPrimaryColor: 'rgba(106, 99, 221, 0.15)',
-    backgroundColor: 'rgb(248, 249, 250);',
+    backgroundColor: '#f7f8fb',
 
     textColor: '#495057',
     textBoldColor: '#000',
