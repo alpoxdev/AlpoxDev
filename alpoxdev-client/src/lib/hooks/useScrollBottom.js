@@ -5,9 +5,8 @@ const useScrollBottom = (pending, getData, duration = 1, delay = 0) => {
 
   const onScroll = useCallback(([entry])=>{
     if(entry.isIntersecting){
-      console.log('마지막 element');
-      getData && getData();
-      
+      // console.log('마지막 element');
+      // getData && getData();
     }
   },[pending, delay, duration]);
 
