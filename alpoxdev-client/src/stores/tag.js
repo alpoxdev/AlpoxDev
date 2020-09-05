@@ -15,12 +15,15 @@ const initialState = Map({
     }),
 });
 
+const SET_TAG_STATE = 'tag/SET_TAG_STATE';
 const TAGS_PENDING = 'tag/TAGS_PENDING';
 const TAGS_SUCCESS = 'tag/TAGS_SUCCESS';
 const TAGS_FAILURE = 'tga/TAGS_FAILURE';
 const TAG_PENDING = 'tag/TAG_PENDING';
 const TAG_SUCCESS = 'tag/TAG_SUCCESS';
 const TAG_FAILURE = 'tag/TAG_FAILURE';
+
+export const setTagState = createAction(SET_TAG_STATE);
 
 export const onGetTags = () => {
     return async (dispatch, getState) => {
@@ -54,6 +57,10 @@ export default handleActions(
         [TAGS_FAILURE]: (state, action) => {
             const error = action?.payload;
             return state.setIn(['tags', 'pending'], false).setIn(['tags', 'error'], error);
+        },
+        [SET_TAG_STATE]: (_, action) => {
+            const state = action?.payload;
+            return state;
         },
     },
     initialState,

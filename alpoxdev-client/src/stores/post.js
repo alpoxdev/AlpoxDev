@@ -16,12 +16,15 @@ const initialState = Map({
     }),
 });
 
-const POSTS_PENDING = 'posts/POSTS_PENDING';
-const POSTS_SUCCESS = 'posts/POSTS_SUCCESS';
-const POSTS_FAILURE = 'posts/POSTS_FAILURE';
-const POST_PENDING = 'posts/POST_PENDING';
-const POST_SUCCESS = 'posts/POST_SUCCESS';
-const POST_FAILURE = 'posts/POST_FAILURE';
+const SET_POST_STATE = 'post/SET_POST_STATE';
+const POSTS_PENDING = 'post/POSTS_PENDING';
+const POSTS_SUCCESS = 'post/POSTS_SUCCESS';
+const POSTS_FAILURE = 'post/POSTS_FAILURE';
+const POST_PENDING = 'post/POST_PENDING';
+const POST_SUCCESS = 'post/POST_SUCCESS';
+const POST_FAILURE = 'post/POST_FAILURE';
+
+export const setPostState = createAction(SET_POST_STATE);
 
 export const onGetPosts = (page = 0, offset = 20) => {
     return async (dispatch, getState) => {
@@ -84,6 +87,10 @@ export default handleActions(
         [POST_FAILURE]: (state, action) => {
             const error = action?.payload;
             return state.setIn(['post', 'pending'], false).setIn(['post', 'error'], null);
+        },
+        [SET_POST_STATE]: (_, action) => {
+            const state = action?.payload;
+            return state;
         },
     },
     initialState,

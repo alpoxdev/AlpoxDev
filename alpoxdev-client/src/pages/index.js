@@ -3,7 +3,7 @@ import React from 'react';
 // redux
 import { wrapper } from 'stores';
 import { useStore } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { serializeStates, deserializeState } from 'lib/utils';
 import * as postActions from 'stores/post';
 import * as tagActions from 'stores/tag';
 
@@ -17,11 +17,13 @@ import { defaultHelmet as helmet } from 'config';
 // dev
 const dev = process.env.NODE_ENV === 'development';
 
-export default function IndexPage() {
-    const store = useStore();
+export default function IndexPage(props) {
+    const { post, tag } = props;
 
+    const store = useStore();
     React.useMemo(() => {
-        Promise.all([store.dispatch(postActions.onGetPosts()), store.dispatch(tagActions.onGetTags())]);
+        store.dispatch(postActions.setPostState(deserializeState(post)));
+        store.dispatch(tagActions.setTagState(deserializeState(tag)));
     }, []);
 
     return (
@@ -34,4 +36,11 @@ export default function IndexPage() {
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({ store, req, res }) => {
     await Promise.all([store.dispatch(postActions.onGetPosts()), store.dispatch(tagActions.onGetTags())]);
+
+    const { post, tag } = store.getState();
+    return {
+        props: {
+            ...serializeStates({ post, tag }),
+        },
+    };
 });

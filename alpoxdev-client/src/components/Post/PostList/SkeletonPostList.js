@@ -4,7 +4,7 @@ import * as styled from './styled';
 export default function SkeletonPostList({ postLength = 18 }) {
     const skeletonPostList = [];
     for (let i = 0; i < postLength; i += 1) {
-        skeletonPostList.push(<SkeletonPostItem />);
+        skeletonPostList.push(<SkeletonPostItem key={i} />);
     }
 
     return <styled.PostList>{skeletonPostList}</styled.PostList>;
