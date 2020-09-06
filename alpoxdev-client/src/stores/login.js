@@ -27,15 +27,17 @@ export const onLogin = () => {
         const {
             input: { id, password },
         } = getState()?.login?.toJS();
-        const url = 'https://api.apick.kr/auth/login';
+        const url = 'https://api.alpox.kr/auth/login';
         const params = { id, password };
 
-        console.log(id, password);
+        // console.log(id, password);
 
         dispatch({ type: LOGIN_PENDING });
 
         try {
             const { status, data } = await axios.post(url, params);
+            // console.log(status, data);
+
             if (status === 200) {
                 const { user, accessToken, refreshToken } = data;
 

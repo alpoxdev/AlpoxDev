@@ -25,7 +25,7 @@ export const onRegister = () => {
         const {
             input: { email, password, nickname },
         } = getState()?.register?.toJS();
-        const url = 'https://api.apick.kr/auth/register';
+        const url = 'https://api.alpox.kr/auth/register';
         const params = { email, password, nickname };
 
         dispatch({ type: REGISTER_PENDING });

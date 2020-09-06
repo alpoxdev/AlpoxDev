@@ -10,15 +10,15 @@ const getHelmet = (helmet) => ({
     url : (helmet.url? helmet.url : defaultHelmet.url)
 });
 
-export default function ReactHelmet({ helmet }) {
-    const [ newHelmet, setNewHelmet ] = React.useState(defaultHelmet);
+export default function ReactHelmet({ helmet = defaultHelmet }) {
+    const [ newHelmet, setNewHelmet ] = React.useState(getHelmet(helmet));
 
-    React.useEffect(()=>{
+    React.useMemo(()=>{
         setNewHelmet(getHelmet(helmet));
     }, [helmet.title, helmet.description, helmet.image, helmet.keywords, helmet.url]);
     
     const { title, description, image, keywords, url } = newHelmet;
-    console.log(title, description, image, keywords, url);
+    // console.log(newHelmet);
 
     return (
         <Helmet

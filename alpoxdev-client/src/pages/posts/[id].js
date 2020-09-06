@@ -26,7 +26,7 @@ export default function PostDetailPage(props){
     }, []);
 
     const { id, title, thumbnail } = post?.post?.post;
-    console.log(id, title, thumbnail);
+    // console.log(id, title, thumbnail);
 
     return(
         <>
@@ -34,7 +34,7 @@ export default function PostDetailPage(props){
                 helmet(
                     title || 'Not Found', 
                     `https://alpox.kr/posts/${id}`,
-                    thumbnail || null
+                    thumbnail ? thumbnail : null
                 )
             }/>
             <PostDetailContainer/>
