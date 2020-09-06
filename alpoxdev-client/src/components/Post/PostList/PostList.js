@@ -40,7 +40,7 @@ function PostItem({ post = null}) {
 
                 <styled.PostContent isThumbnail={post.thumbnail ? 'true' : ''}>
                     {post.title && <styled.Title>{post.title}</styled.Title>}
-                    {post.content && <styled.Content>{markdownRemoval(post.content.slice(0, 100))}</styled.Content>}
+                    {post.content && <styled.Content>{markdownRemoval(post.content.slice(0, 200))}</styled.Content>}
                 </styled.PostContent>
 
                 <styled.PostFooter>

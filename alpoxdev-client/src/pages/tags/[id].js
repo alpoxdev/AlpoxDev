@@ -23,9 +23,11 @@ export default function PostDetailPage(props){
         store.dispatch(uiActions.setUIState(deserializeState(ui)));
     }, []);
 
+    const tagName = tag?.tag?.tag?.tag;
+
     return(
         <>
-            <ReactHelmet helmet={helmet(null || 'Not Found', `https://alpox.kr/tags/${1}`)}/>
+            <ReactHelmet helmet={helmet(tagName || 'Not Found', `https://alpox.kr/tags/${1}`)}/>
             <TagDetailContainer/>
         </>
     );

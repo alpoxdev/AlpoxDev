@@ -53,7 +53,7 @@ export const onGetTag = (id) => {
         const { status, data } = await Request.onRequestGet({ url });
 
         if(status === 200){
-            dispatch({ type : TAG_SUCCESS, payload : data.tag });
+            dispatch({ type : TAG_SUCCESS, payload : data });
         }else{
             dispatch({ type : TAG_FAILURE, payload : { status, data }});
         }
@@ -72,6 +72,17 @@ export default handleActions(
         [TAGS_FAILURE]: (state, action) => {
             const error = action?.payload;
             return state.setIn(['tags', 'pending'], false).setIn(['tags', 'error'], error);
+        },
+        [TAG_PENDING]: (state, action) => {
+            return state.setIn(['tag', 'pending'], true).setIn(['tag', 'error'], null);
+        },
+        [TAG_SUCCESS]: (state, action) => {
+            const tag = action?.payload;
+            return state.setIn(['tag', 'pending'], false).setIn(['tag', 'error'], null).setIn(['tag', 'tag'], tag);
+        },
+        [TAG_FAILURE]: (state, action) => {
+            const error = action.payload;
+            return state.setIn(['tag', 'pending'], false).setIn(['tag', 'error'], error);
         },
         [SET_TAG_STATE]: (_, action) => {
             const state = action?.payload;
