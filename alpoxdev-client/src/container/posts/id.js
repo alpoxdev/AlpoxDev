@@ -13,6 +13,8 @@ import {
 function PostDetailContainer({ postState }){
     const { post: { post }} = postState;
 
+    if(!post) return null;
+
     return(
         <>
             <PostDetailHeader post={post}/>

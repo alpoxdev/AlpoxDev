@@ -19,9 +19,9 @@ import { defaultHelmet as helmet } from 'config';
 const dev = process.env.NODE_ENV === 'development';
 
 export default function IndexPage(props) {
-    const { post, tag, ui } = props;
-
     const store = useStore();
+    const { post, tag, ui } = props;
+    
     React.useMemo(() => {
         store.dispatch(postActions.setPostState(deserializeState(post)));
         store.dispatch(tagActions.setTagState(deserializeState(tag)));

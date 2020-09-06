@@ -31,3 +31,7 @@ export const tagListHelmet = {
 export const tagDetailHelmet = (tag) => ({
     title: `${tag} - AlpoxDev`,
 });
+
+export const aboutHelmet = {
+    title : 'About - AlpoxDev'
+}

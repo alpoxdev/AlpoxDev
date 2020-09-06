@@ -26,6 +26,7 @@ export default function PostDetailPage(props){
     }, []);
 
     const { id, title, thumbnail } = post?.post?.post;
+    console.log(id, title, thumbnail);
 
     return(
         <>

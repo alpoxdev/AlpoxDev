@@ -25,8 +25,11 @@ const TAG_FAILURE = 'tag/TAG_FAILURE';
 
 export const setTagState = createAction(SET_TAG_STATE);
 
-export const onGetTags = () => {
+export const onGetTags = (init = false) => {
     return async (dispatch, getState) => {
+        const { tags } = getState().tag?.toJS().tags;
+        if(init && tags.length > 0) return;
+        
         console.log(`태그 목록 불러오는중...`);
         dispatch({ type: TAGS_PENDING });
 

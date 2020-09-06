@@ -31,10 +31,11 @@ const POST_FAILURE = 'post/POST_FAILURE';
 export const setPostState = createAction(SET_POST_STATE);
 export const setPostMore = createAction(SET_POST_MORE);
 
-export const onGetPosts = () => {
+export const onGetPosts = (init = false) => {
     return async (dispatch, getState) => {
-        const { pending, page, offset, more } = getState().post?.toJS().posts;
+        const { pending, page, offset, more, posts } = getState().post?.toJS().posts;
         if(!more || pending) return;
+        if(init && posts.length > 0) return;
 
         console.log(`글 목록을 불러오는중...`);
 

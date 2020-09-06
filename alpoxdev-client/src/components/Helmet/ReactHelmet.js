@@ -1,15 +1,24 @@
-import Head from 'next/head';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import { defaultHelmet } from 'config';
 
-export default function ReactHelmet({ helmet = defaultHelmet }) {
-    for(const [key, value] of Object.entries(helmet)){
-        if(!value) delete helmet[key];
-    }
+const getHelmet = (helmet) => ({
+    title : (helmet.title? helmet.title : defaultHelmet.title),
+    description : (helmet.description? helmet.description : defaultHelmet.description),
+    image : (helmet.image? helmet.image : defaultHelmet.image),
+    keywords : (helmet.keywords? helmet.keywords : defaultHelmet.keywords),
+    url : (helmet.url? helmet.url : defaultHelmet.url)
+});
 
-    helmet = Object.assign(defaultHelmet, helmet);
-    const { title, description, image, keywords, url } = helmet;
-    // console.log(title, description, image, keywords, url);
+export default function ReactHelmet({ helmet }) {
+    const [ newHelmet, setNewHelmet ] = React.useState(defaultHelmet);
+
+    React.useEffect(()=>{
+        setNewHelmet(getHelmet(helmet));
+    }, [helmet.title, helmet.description, helmet.image, helmet.keywords, helmet.url]);
+    
+    const { title, description, image, keywords, url } = newHelmet;
+    console.log(title, description, image, keywords, url);
 
     return (
         <Helmet
