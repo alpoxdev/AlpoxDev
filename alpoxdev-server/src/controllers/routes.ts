@@ -20,7 +20,7 @@ export const CREATE_POST: string = 'POST /posts';
 */
 
 export const GET_TAGS: string = 'GET /tags';
-
+export const GET_TAG: string = 'GET /tags/:id';
 
 /*
     /lessons
@@ -28,7 +28,6 @@ export const GET_TAGS: string = 'GET /tags';
 
 export const GET_LESSON_INFO: string = 'GET /lessons/info';
 export const GET_LESSONS: string = 'GET /lessons?name=';
-
 
 /*
     /yourface
