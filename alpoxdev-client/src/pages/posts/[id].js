@@ -25,9 +25,17 @@ export default function PostDetailPage(props){
         store.dispatch(uiActions.setUIState(deserializeState(ui)));
     }, []);
 
+    const { id, title, thumbnail } = post?.post?.post;
+
     return(
         <>
-            <ReactHelmet helmet={helmet(post?.post?.post?.title || 'Not Found', `https://alpox.kr/posts/${post?.post?.post?.id}`)}/>
+            <ReactHelmet helmet={
+                helmet(
+                    title || 'Not Found', 
+                    `https://alpox.kr/posts/${id}`,
+                    thumbnail || null
+                )
+            }/>
             <PostDetailContainer/>
         </>
     );

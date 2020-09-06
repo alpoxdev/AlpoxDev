@@ -18,9 +18,10 @@ export const registerHelmet = {
     title: '회원가입 - AlpoxDev',
 };
 
-export const postDetailHelmet = (title, url) => ({
+export const postDetailHelmet = (title, url, image) => ({
     title: `${title} - AlpoxDev`,
     url,
+    image
 });
 
 export const tagListHelmet = {

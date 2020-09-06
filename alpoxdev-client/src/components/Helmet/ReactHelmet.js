@@ -3,13 +3,13 @@ import { Helmet } from 'react-helmet';
 import { defaultHelmet } from 'config';
 
 export default function ReactHelmet({ helmet = defaultHelmet }) {
-    const {
-        title = helmet?.title || defaultHelmet.title,
-        description = helmet?.description || defaultHelmet.description,
-        image = helmet?.image || defaultHelmet.image,
-        keywords = helmet?.keywords || defaultHelmet.keywords,
-        url = helmet?.url || defaultHelmet.url,
-    } = helmet;
+    for(const [key, value] of Object.entries(helmet)){
+        if(!value) delete helmet[key];
+    }
+
+    helmet = Object.assign(defaultHelmet, helmet);
+    const { title, description, image, keywords, url } = helmet;
+    // console.log(title, description, image, keywords, url);
 
     return (
         <Helmet
