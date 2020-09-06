@@ -30,7 +30,7 @@ export const onLogin = () => {
         const url = 'https://api.alpox.kr/auth/login';
         const params = { id, password };
 
-        // console.log(id, password);
+        console.log(id, password);
 
         dispatch({ type: LOGIN_PENDING });
 
@@ -39,6 +39,7 @@ export const onLogin = () => {
             // console.log(status, data);
 
             if (status === 200) {
+                console.log(`로그인 성공!`);
                 const { user, accessToken, refreshToken } = data;
 
                 const setUser = bindActionCreators(userActions.setUser, dispatch);
