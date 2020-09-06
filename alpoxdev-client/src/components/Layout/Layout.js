@@ -19,7 +19,7 @@ function Layout({ children, tagState, uiState, userState, userActions }) {
     const { accessToken, refreshToken, loginTime } = userState;
 
     React.useEffect(()=>{
-        // userActions.onLogout(); 
+        console.log(loginTime);
         const isRefresh = parseRefreshTimestamp(loginTime);
 
         if(accessToken && refreshToken && isRefresh){
