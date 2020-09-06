@@ -3,19 +3,26 @@ import React from 'react';
 // redux
 import { connect } from 'react-redux';
 
+// components
+import {
+    TagDetailHeader,
+    PostList
+} from 'components';
+
 function TagDetailContainer({ tagState }){
-    const { tags : { tags } } = tagState;
-    console.log(tags);
+    const { tag : { tag } } = tagState;
+
     return(
         <>
-
+            <TagDetailHeader tag={tag}/>
+            <PostList posts={tag.posts || []}/>
         </>
     );
 }
 
 export default connect(
     (state) => ({
-        state : state.tag.toJS()
+        tagState : state?.tag.toJS()
     }),
     null
 )(TagDetailContainer);
