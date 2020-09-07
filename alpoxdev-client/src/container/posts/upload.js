@@ -10,6 +10,8 @@ import * as postActions from 'stores/post';
 // component
 import { PostUploadViewer, PostUploadInput, PostUploadButton } from 'components';
 
+const dev = (process.env.NODE_ENV !== 'production');
+
 function PostUploadContainer({ isUpdate = false, postState, postActions, userState }){
     const { upload, update } = postState;
     const { user } = userState;
@@ -30,6 +32,22 @@ function PostUploadContainer({ isUpdate = false, postState, postActions, userSta
 
     React.useEffect(()=>{
         const post = update?.post;
+
+        if(!user && !dev){
+            Router.push('/auth');
+            alert(`로그인이 되어있지 않습니다.`);
+        }
+
+        if(isUpdate && !post){
+            Router.replace('/');
+            alert(`데이터가 존재하지 않습니다.`);
+        }
+
+        if(isUpdate && (post?.user?.email !== user?.email || user.role !== 'admin')){
+            Router.replace(`/`);
+            alert(`권한이 없습니다.`);
+        }
+
         if(isUpdate && post){
             const { title, thumbnail, content, tags } = post;
             const listTag = tags.map((tag)=>{
@@ -44,17 +62,6 @@ function PostUploadContainer({ isUpdate = false, postState, postActions, userSta
     }, []);
 
     React.useEffect(()=>{
-        const post = update?.post;
-
-        if(isUpdate && !post){
-            Router.replace('/posts');
-            alert(`데이터가 존재하지 않습니다.`);
-        }
-        if(!user && !dev){
-            Router.push('/auth');
-            alert(`로그인이 되어있지 않습니다.`);
-        }
-
         if(upload.done){
             Router.push(`/posts/${upload.post.id}`);
         }
@@ -68,7 +75,6 @@ function PostUploadContainer({ isUpdate = false, postState, postActions, userSta
     const setInput = !isUpdate ? setUploadInput : setUpdateInput;
     const setTags = !isUpdate ? setUploadTags : setUpdateTags;
     const onUpload = !isUpdate ? onUploadPost : onUpdatePost;
-    console.log(input);
 
     return(
         <PostUploadWrapper>
@@ -111,7 +117,7 @@ const PostUploadWrapper = styled.div`
     position : absolute;
     top : 64px;
     left : 0;
-    z-index : 3;
+    z-index : 1;
 `;
 
 const PostUploadSection = styled.div`

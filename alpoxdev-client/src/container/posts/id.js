@@ -10,12 +10,13 @@ import {
     Disqus
 } from 'components';
 
-function PostDetailContainer({ postState }){
-    const { post: { post }} = postState;
+function PostDetailContainer({ postState, userState }){
+    const post = postState?.post?.post || null;
+    const user = userState?.user || null;
 
     return(
         <>
-            <PostDetailHeader post={post}/>
+            <PostDetailHeader post={post} user={user}/>
             <PostDetailContent post={post}/>
             <Disqus id={post?.id} title={post?.title}/>
         </>
@@ -24,7 +25,8 @@ function PostDetailContainer({ postState }){
 
 export default connect(
     (state) => ({
-        postState: state.post?.toJS()
+        postState: state.post?.toJS(),
+        userState: state.user?.toJS()
     }),
     null
 )(PostDetailContainer);

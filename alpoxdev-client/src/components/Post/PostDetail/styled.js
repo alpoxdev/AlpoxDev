@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Header, Text } from 'lib/styles';
+import { Header, Text, Button } from 'lib/styles';
 
 /*
     Header
@@ -14,13 +14,32 @@ export const PostDetailHeader = styled.div`
 */
 
 export const HeaderTopWrapper = styled.div`
-    
+    display : flex;
+    flex-wrap : wrap;
 `;
 
 export const HeaderTitle = styled(Header)`
-    width : 100%;
     font-size : 2rem;
+`;
+
+export const HeaderTopButtonWrapper = styled.div`
+    margin-left : auto;
+    margin-bottom : auto;
+`;
+
+export const HeaderButton = styled(Button)`
+    margin-right : 0.6rem;
+    padding : 0.5rem 0.85rem;
+    ${
+        props=>props.isDelete && 'background-color : red;'
+    }
+
+    font-size : 1rem;
+    font-weight : bold;
     
+    &:last-child{
+        margin-right : 0;
+    }
 `;
 
 /*
