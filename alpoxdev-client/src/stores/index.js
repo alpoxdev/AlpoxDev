@@ -54,7 +54,7 @@ const makeStore = ({ isServer = typeof window === 'undefined' }) => {
     const persistConfig = {
         transforms: [immutableTransform()],
         key: 'apick-client',
-        whitelist: ['user'],
+        whitelist: ['user', 'tag'],
         storage,
     };
 

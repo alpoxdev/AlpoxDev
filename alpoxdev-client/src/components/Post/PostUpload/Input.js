@@ -2,6 +2,8 @@ import React, { useCallback } from 'react';
 import * as styled from './styled';
 
 export default function PostUploadInput({ input, setInput, setTags }){
+    console.log(`PostUploadInput`, input);
+    
     const onEnter = useCallback((e) => {
         if (e.key === 'Enter') {
             setTags({ type : 'create', value : input.tagInput });

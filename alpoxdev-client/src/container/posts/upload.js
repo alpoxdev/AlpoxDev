@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
 
@@ -11,7 +11,7 @@ import * as postActions from 'stores/post';
 import { PostUploadViewer, PostUploadInput, PostUploadButton } from 'components';
 
 function PostUploadContainer({ isUpdate = false, postState, postActions, userState }){
-    const { upload, update, } = postState;
+    const { upload, update } = postState;
     const { user } = userState;
     const {
         setUploadInput,
@@ -20,23 +20,55 @@ function PostUploadContainer({ isUpdate = false, postState, postActions, userSta
         setUpdateTags,
         onUploadPost,
         onUpdatePost,
+        resetUpload,
+        resetUpdate
     } = postActions;
 
-    const input = !isUpdate ? upload.input : update.input;
-    const setInput = !isUpdate ? setUploadInput : setUpdateInput;
-    const setTags = !isUpdate ? setUploadTags : setUpdateTags;
-    const onUpload = !isUpdate ? onUploadPost : onUpdatePost;
+    React.useMemo(()=>{
+        !isUpdate ? resetUpload() : resetUpdate();
+    }, []);
 
     React.useEffect(()=>{
+        const post = update?.post;
+        if(isUpdate && post){
+            const { title, thumbnail, content, tags } = post;
+            const listTag = tags.map((tag)=>{
+                return tag.tag;
+            });
+
+            setUpdateInput({ name : 'title', value : title });
+            setUpdateInput({ name : 'thumbnail', value : thumbnail });
+            setUpdateInput({ name : 'content', value : content });
+            setUpdateInput({ name : 'tags', value : listTag });
+        }
+    }, []);
+
+    React.useEffect(()=>{
+        const post = update?.post;
+
+        if(isUpdate && !post){
+            Router.replace('/posts');
+            alert(`데이터가 존재하지 않습니다.`);
+        }
         if(!user && !dev){
             Router.push('/auth');
             alert(`로그인이 되어있지 않습니다.`);
         }
 
-        if(isUpdate){
-            // 글이 수정파트면?    
+        if(upload.done){
+            Router.push(`/posts/${upload.post.id}`);
         }
-    }, [user, isUpdate]);
+        if(update.done){
+            Router.push(`/posts/${update.post.id}`);
+        }
+    }, [isUpdate, upload.done, update.done]);
+
+    const input = !isUpdate ? upload.input : update.input;
+    const pending = !isUpdate ? upload.pending : update.pending;
+    const setInput = !isUpdate ? setUploadInput : setUpdateInput;
+    const setTags = !isUpdate ? setUploadTags : setUpdateTags;
+    const onUpload = !isUpdate ? onUploadPost : onUpdatePost;
+    console.log(input);
 
     return(
         <PostUploadWrapper>
@@ -47,10 +79,11 @@ function PostUploadContainer({ isUpdate = false, postState, postActions, userSta
                     setTags={setTags}/>
                 <PostUploadButton 
                     isUpdate={isUpdate} 
-                    onUpload={onUpload}/>
+                    onUpload={onUpload}
+                    pending={pending}/>
             </PostUploadSection>
             <PostUploadSection viewer>
-                <PostUploadViewer markdown={input.content}/>
+                <PostUploadViewer markdown={!isUpdate ? upload.input.content : update.input.content}/>
             </PostUploadSection>
         </PostUploadWrapper>
     )
