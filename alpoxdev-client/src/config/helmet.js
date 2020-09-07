@@ -35,3 +35,11 @@ export const tagDetailHelmet = (tag) => ({
 export const aboutHelmet = {
     title : 'About - AlpoxDev'
 }
+
+export const postUploadHelmet = {
+    title : '글 업로드 - AlpoxDev'
+}
+
+export const postUpdateHelmet = (title) => ({
+    title : `${title} 수정 - AlpoxDev`
+})
