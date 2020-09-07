@@ -14,6 +14,7 @@ export const AUTH_REFRESH: string = 'POST /auth/refresh';
 export const GET_POSTS: string = 'GET /posts';
 export const GET_POST: string = 'GET /posts/:id';
 export const CREATE_POST: string = 'POST /posts';
+export const UPDATE_POST: string = 'PATCH /posts/:id';
 
 /*
     /tags
