@@ -75,4 +75,21 @@ export default class Request {
 
         return { status, data };
     }
+
+    static async onRequestDelete({ url, params, headers }){
+        try{
+            return await this.tryRequestDelete({ url, params, headers });
+        }catch(error){
+            return this.onError(error);
+        }
+    }
+
+    static async tryRequestDelete({ url, params, headers }){
+        console.log(url, params, headers);
+        const response = await axios.delete(url, { data : params, headers });
+        const status = response?.status;
+        const data = response?.data;
+
+        return { status, data };
+    }
 }

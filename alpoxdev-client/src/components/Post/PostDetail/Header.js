@@ -5,7 +5,7 @@ import { parseTimestamp } from 'lib/utils';
 
 import TagList from './TagList';
 
-export default function PostDetailHeader({ post = null, user = null }){
+export default function PostDetailHeader({ post = null, user = null, onRemovePost }){
     const isThumbnail = post?.user?.profile;
     const isFix = (post?.user?.email === user?.email);
 
@@ -14,7 +14,7 @@ export default function PostDetailHeader({ post = null, user = null }){
             <styled.HeaderTopWrapper>
                 <styled.HeaderTitle>{post.title && post.title ? post.title : ''}</styled.HeaderTitle>
                 {isFix && <styled.HeaderTopButtonWrapper>
-                    <styled.HeaderButton isDelete>
+                    <styled.HeaderButton isDelete onClick={()=>onRemovePost(post.id)}>
                         삭제
                     </styled.HeaderButton>
                     <Link href="/posts/:id/update" as={`/posts/${post.id}/update`}>

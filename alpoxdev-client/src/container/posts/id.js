@@ -2,6 +2,8 @@ import React from 'react';
 
 // redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as postActions from 'stores/post';
 
 // components
 import {
@@ -10,13 +12,13 @@ import {
     Disqus
 } from 'components';
 
-function PostDetailContainer({ postState, userState }){
+function PostDetailContainer({ postState, userState, postActions }){
     const post = postState?.post?.post || null;
     const user = userState?.user || null;
 
     return(
         <>
-            <PostDetailHeader post={post} user={user}/>
+            <PostDetailHeader post={post} user={user} onRemovePost={postActions.onRemovePost}/>
             <PostDetailContent post={post}/>
             <Disqus id={post?.id} title={post?.title}/>
         </>
@@ -28,6 +30,8 @@ export default connect(
         postState: state.post?.toJS(),
         userState: state.user?.toJS()
     }),
-    null
+    (dispatch) => ({
+        postActions: bindActionCreators(postActions, dispatch)
+    })
 )(PostDetailContainer);
 

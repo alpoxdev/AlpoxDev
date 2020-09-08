@@ -42,6 +42,11 @@ const initialState = Map({
         error : null,
         post : null,
         done : false
+    }),
+    remove : Map({
+        pending : false,
+        error : null,
+        done : false
     })
 });
 
@@ -61,6 +66,9 @@ const UPLOAD_FAILURE = 'post/UPLOAD_FAILURE';
 const UPDATE_PENDING = 'post/UPDATE_FAILURE';
 const UPDATE_SUCCESS = 'post/UPDATE_SUCCESS';
 const UPDATE_FAILURE = 'post/UPDATE_FAILURE';
+const REMOVE_PENDING = 'post/REMOVE_PENDING';
+const REMOVE_SUCCESS = 'post/REMOVE_SUCCESS';
+const REMOVE_FAILURE = 'post/REMOVE_FAILURE';
 
 const SET_UPLOAD_INPUT = 'post/SET_UPLOAD_INPUT';
 const SET_UPDATE_INPUT = 'post/SET_UPDATE_INPUT';
@@ -175,6 +183,28 @@ export const onUpdatePost = () => {
     }
 }
 
+export const onRemovePost = (id) => {
+    return async(dispatch, getState) => {
+        const { pending } = getState()?.post?.toJS().remove;
+        const { accessToken } = getState().user?.toJS();
+        if(pending || !accessToken) return;
+
+        console.log(`글 삭제중...`);
+
+        dispatch({ type : REMOVE_PENDING });
+        
+        const url = `https://api.alpox.kr/posts/${id}`;
+        const headers = { Authorization : `Bearer ${accessToken}` };
+        const { status, data } = await Request.onRequestDelete({ url, headers });
+
+        if(status === 204){
+            dispatch({ type : REMOVE_SUCCESS });
+        }else{
+            dispatch({ type : REMOVE_FAILURE, payload : { status, data } });
+        }
+    }
+}
+
 export default handleActions(
     {
         [POSTS_PENDING]: (state, _) => {
@@ -241,6 +271,25 @@ export default handleActions(
                 .setIn(['update', 'pending'], false)
                 .setIn(['update', 'error'], error)
                 .setIn(['update', 'done'], false);
+        },
+        [REMOVE_PENDING]: (state, action) => {
+            return state
+                .setIn(['remove', 'pending'], true)
+                .setIn(['remove', 'error'], null)
+                .setIn(['remove', 'done'], false);
+        },
+        [REMOVE_SUCCESS]: (state, action) => {
+            return state
+                .setIn(['remove', 'pending'], false)
+                .setIn(['remove', 'error'], null)
+                .setIn(['remove', 'done'], true);
+        },
+        [REMOVE_FAILURE]: (state, action) => {
+            const error = action.payload;
+            return state
+                .setIn(['remove', 'pending'], false)
+                .setIn(['remove', 'error'], error)
+                .setIn(['remove', 'done'], false);
         },
         [SET_POST_STATE]: (_, action) => {
             const state = action?.payload;
