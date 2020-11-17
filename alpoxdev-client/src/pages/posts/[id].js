@@ -1,61 +1,39 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 // redux
-import { wrapper } from 'stores';
-import { useStore } from 'react-redux';
-import { serializeStates, deserializeState } from 'lib/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as postActions from 'stores/post';
-import * as tagActions from 'stores/tag';
-import * as uiActions from 'stores/ui';
 
 // container
-import PostDetailContainer from 'container/posts/id';
+import PostDetailContainer from 'container/post/detail';
 
-// components
-import { Helmet, ReactHelmet } from 'components';
-import { postDetailHelmet as helmet} from 'config';
+// component
+import { Helmet } from 'components';
 
-export default function PostDetailPage(props){
-    const { post, tag, ui } = props;
+export default function PostDetailPage() {
+    const router = useRouter();
+    const { id } = router.query;
 
-    const store = useStore();
-    React.useMemo(()=>{
-        store.dispatch(postActions.setPostState(deserializeState(post)));
-        store.dispatch(tagActions.setTagState(deserializeState(tag)));
-        store.dispatch(uiActions.setUIState(deserializeState(ui)));
-    }, []);
+    const dispatch = useDispatch();
+    const { onGetPost } = bindActionCreators(postActions, dispatch);
 
-    const { id, title, thumbnail } = post?.post?.post;
-    // console.log(id, title, thumbnail);
+    const { post } = useSelector((state) => ({
+        post: state.post.toJS().post,
+    }));
+    const { data, pending } = post;
 
-    return(
+    React.useEffect(() => {
+        if (id && `${data?.id}` !== id && !pending) {
+            onGetPost({ id });
+        }
+    }, [id]);
+
+    return (
         <>
-            <ReactHelmet helmet={
-                helmet(
-                    title || 'Not Found', 
-                    `https://alpox.kr/posts/${id}`,
-                    thumbnail ? thumbnail : null
-                )
-            }/>
-            <PostDetailContainer/>
+            <Helmet />
+            <PostDetailContainer />
         </>
     );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps(async ({ store, req, res, params }) => {
-    const id = params.id;
-
-    await Promise.all([
-        store.dispatch(postActions.onGetPost(id)),
-        store.dispatch(tagActions.onGetTags()),
-        store.dispatch(uiActions.setDrawerActive('Posts'))
-    ]);
-
-    const { post, tag, ui } = store.getState();
-
-    return {
-        props: {
-            ...serializeStates({ post, tag, ui }),
-        },
-    };
-});

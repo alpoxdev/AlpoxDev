@@ -26,8 +26,8 @@ export default function Drawer({ tags = [], active }) {
             <Link href="/" as="/">
                 <styled.DrawerLogo>AlpoxDev</styled.DrawerLogo>
             </Link>
-            
-            <DrawerMenuList active={active}/>
+
+            <DrawerMenuList active={active} />
             <PopularTagList tags={tags} />
         </styled.Drawer>
     );
@@ -35,10 +35,7 @@ export default function Drawer({ tags = [], active }) {
 
 export function DrawerMenuList({ active }) {
     const menuList = menus.map((menu) => {
-        return <DrawerMenuItem 
-                    key={menu.id} 
-                    menu={menu} 
-                    active={active}/>;
+        return <DrawerMenuItem key={menu.id} menu={menu} active={active} />;
     });
 
     return (
@@ -74,7 +71,7 @@ export function PopularTagList({ tags = [] }) {
 
 export function PopularTagItem({ tag = null }) {
     return (
-        <Link href={`/tags/[id]`} as={`/tags/${tag.id}`}>
+        <Link href="/tags/[id]" as={`/tags/${tag.id}`}>
             <styled.PopularTagItem># {tag.tag}</styled.PopularTagItem>
         </Link>
     );

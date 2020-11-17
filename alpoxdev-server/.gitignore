@@ -1,7 +1,0 @@
-node_modules/
-.serverless/
-dist/
-
-.env
-ormconfig.js
-serverless.yml

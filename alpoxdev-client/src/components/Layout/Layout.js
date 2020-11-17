@@ -1,31 +1,52 @@
 import React from 'react';
 import Head from 'next/head';
-import * as styled from './styled';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 // redux
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as userActions from 'stores/user';
+import * as tagActions from 'stores/tag';
 
 // components
-import { Header, Drawer } from 'components';
+import { Drawer } from 'components';
 
-// utils
-import { parseRefreshTimestamp } from 'lib/utils';
+const getActive = (path) => {
+    const pathLength = path?.length;
 
-function Layout({ children, tagState, uiState, userState, userActions }) {
-    const { tags : { tags }} = tagState;
-    const { drawer : { active }} = uiState;
-    const { accessToken, refreshToken, loginTime } = userState;
-
-    React.useEffect(()=>{
-        console.log(loginTime);
-        const isRefresh = parseRefreshTimestamp(loginTime);
-
-        if(accessToken && refreshToken && isRefresh){
-            userActions.onRefresh();
+    if (pathLength >= 2) {
+        // / console.log(path[1]);
+        if (path[1] === '' || path[1] === 'posts') {
+            return 'Posts';
         }
-    }, []);
+        if (path[1] === 'tags') {
+            return 'Tags';
+        }
+        if (path[1] === 'about') {
+            return 'About';
+        }
+    }
+
+    return 'Posts';
+};
+
+export default function Layout({ children }) {
+    const router = useRouter();
+
+    const dispatch = useDispatch();
+    const { onGetTags } = bindActionCreators(tagActions, dispatch);
+
+    const { tags } = useSelector((state) => ({
+        tags: state.tag.toJS().tags,
+    }));
+    const { data, pending } = tags;
+
+    React.useEffect(() => {
+        if (data?.length === 0 && !pending) onGetTags();
+    }, [data]);
+
+    const path = router.pathname.split('/');
+    const active = getActive(path);
 
     return (
         <>
@@ -37,22 +58,35 @@ function Layout({ children, tagState, uiState, userState, userActions }) {
                 />
             </Head>
 
-            <styled.LayoutWrapper>
-                <Header/>
-                <Drawer tags={tags} active={active}/>
-                <styled.Layout>{children}</styled.Layout>
-            </styled.LayoutWrapper>
+            <LayoutView>
+                <Drawer tags={data} active={active} />
+                <LayoutContent>{children}</LayoutContent>
+            </LayoutView>
         </>
     );
 }
 
-export default connect(
-    (state) => ({
-        tagState: state.tag.toJS(),
-        uiState: state.ui.toJS(),
-        userState : state.user.toJS()
-    }),
-    (dispatch) => ({
-        userActions : bindActionCreators(userActions, dispatch)
-    })
-)(Layout);
+const LayoutView = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    background-color: ${(props) => props.theme.backgroundColor};
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+`;
+
+const LayoutContent = styled.div`
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 1rem;
+
+    @media (min-width: 992px) {
+        width: 960px;
+    }
+
+    @media (min-width: 1200px) {
+        width: 1140px;
+    }
+`;

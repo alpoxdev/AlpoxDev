@@ -1,7 +1,13 @@
+/* eslint-disable no-prototype-builtins */
+
 export const markdownRemoval = (md, options) => {
     options = options || {};
-    options.listUnicodeChar = options.hasOwnProperty('listUnicodeChar') ? options.listUnicodeChar : false;
-    options.stripListLeaders = options.hasOwnProperty('stripListLeaders') ? options.stripListLeaders : true;
+    options.listUnicodeChar = options.hasOwnProperty('listUnicodeChar')
+        ? options.listUnicodeChar
+        : false;
+    options.stripListLeaders = options.hasOwnProperty('stripListLeaders')
+        ? options.stripListLeaders
+        : true;
     options.gfm = options.hasOwnProperty('gfm') ? options.gfm : true;
     options.useImgAltText = options.hasOwnProperty('useImgAltText') ? options.useImgAltText : true;
 
@@ -13,7 +19,10 @@ export const markdownRemoval = (md, options) => {
     try {
         if (options.stripListLeaders) {
             if (options.listUnicodeChar)
-                output = output.replace(/^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm, `${options.listUnicodeChar} $1`);
+                output = output.replace(
+                    /^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm,
+                    `${options.listUnicodeChar} $1`,
+                );
             else output = output.replace(/^([\s\t]*)([\*\-\+]|\d+\.)\s+/gm, '$1');
         }
         if (options.gfm) {

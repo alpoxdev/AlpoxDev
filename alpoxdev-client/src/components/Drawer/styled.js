@@ -11,7 +11,6 @@ export const Drawer = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-
     @media (min-width: 1520px) {
         display: block;
     }
@@ -30,7 +29,7 @@ export const DrawerTitle = styled(Header)`
     font-family: ${(props) => props.theme.subPrimaryFont};
     font-weight: 900;
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 `;
 
 export const DrawerMenuList = styled.div`
@@ -40,16 +39,14 @@ export const DrawerMenuList = styled.div`
 export const DrawerMenuItem = styled(Text)`
     margin: 0;
     padding-left: 1rem;
-    padding-top: 0.55rem;
-    padding-bottom: 0.55rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.45rem;
     font-family: ${(props) => props.theme.subPrimaryFont};
     font-weight: ${(props) => (props.active === 'true' ? '700' : '400')};
     font-style: ${(props) => (props.active === 'true' ? 'italic' : 'normal')};
     font-size: 1.05rem;
     color: ${(props) =>
-        props.active === 'true'
-            ? props.theme.textBoldColor
-            : props.theme.textColor};
+        props.active === 'true' ? props.theme.textBoldColor : props.theme.textColor};
     border-left: 3px solid transparent;
     border-color: ${(props) =>
         props.active === 'true' ? props.theme.primaryColor : 'transparent'};
@@ -64,6 +61,6 @@ export const PopularTagList = styled.div`
 
 export const PopularTagItem = styled(Text)`
     padding-left: 1rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
     cursor: pointer;
 `;

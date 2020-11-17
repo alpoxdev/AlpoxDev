@@ -1,22 +1,38 @@
 import React from 'react';
-import * as styled from './styled';
+import styled from 'styled-components';
+import { Text } from 'lib/styles';
 
-export default function PostDetailTagList({ tags = [] }){
-    const tagList = tags.map((tag) => {
-        return <PostDetailTagItem key={tag.id} tag={tag}/>;
-    });
+export default function PostDetailTagList({ tags = [] }) {
+    if (!Array.isArray(tags)) return null;
+    if (tags?.length === 0) return null;
 
-    return(
-        <styled.PostDetailTagList>
-            {tagList}
-        </styled.PostDetailTagList>
-    )
+    const tagList = tags.map((tag) => <PostDetailTagItem key={tag?.id} tag={tag} />);
+
+    return <PostDetailTagListView>{tagList}</PostDetailTagListView>;
 }
 
-export function PostDetailTagItem({ tag = null }){
-    return(
-        <styled.PostDetailTagItem>
-            {tag.tag}
-        </styled.PostDetailTagItem>
-    )
+function PostDetailTagItem({ tag }) {
+    return <PostDetailTagItemView>{tag?.tag}</PostDetailTagItemView>;
 }
+
+const PostDetailTagListView = styled.div`
+    margin-top: 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+`;
+
+export const PostDetailTagItemView = styled(Text)`
+    margin-top: 0.65rem;
+    margin-right: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    color: ${(props) => props.theme.primaryColor};
+    background-color: ${(props) => props.theme.subPrimaryColor};
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 14px;
+    cursor: pointer;
+    &:last-child {
+        margin-right: 0;
+    }
+`;

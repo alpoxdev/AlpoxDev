@@ -1,51 +1,39 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 // redux
-import { wrapper } from 'stores';
-import { useStore } from 'react-redux';
-import { serializeStates, deserializeState } from 'lib/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as tagActions from 'stores/tag';
-import * as uiActions from 'stores/ui';
-
-// container
-import TagDetailContainer from 'container/tags/id';
 
 // components
-import { ReactHelmet } from 'components';
-import { tagDetailHelmet as helmet} from 'config';
+import { Helmet } from 'components';
 
-export default function PostDetailPage(props){
-    const { tag, ui } = props;
+// container
+import PostDetailContainer from 'container/tag/detail';
 
-    const store = useStore();
-    React.useMemo(()=>{
-        store.dispatch(tagActions.setTagState(deserializeState(tag)));
-        store.dispatch(uiActions.setUIState(deserializeState(ui)));
-    }, []);
+export default function TagDetailPage() {
+    const router = useRouter();
+    const id = router.query?.id;
 
-    const tagName = tag?.tag?.tag?.tag;
+    const dispatch = useDispatch();
+    const { onGetTag } = bindActionCreators(tagActions, dispatch);
 
-    return(
+    const { tag } = useSelector((state) => ({
+        tag: state.tag.toJS().tag,
+    }));
+    const { data, done, pending } = tag;
+
+    React.useEffect(() => {
+        if (id && `${data?.id}` !== id && !pending) {
+            onGetTag({ id });
+        }
+    }, [id]);
+
+    return (
         <>
-            <ReactHelmet helmet={helmet(tagName || 'Not Found', `https://alpox.kr/tags/${1}`)}/>
-            <TagDetailContainer/>
+            <Helmet />
+            <PostDetailContainer />
         </>
     );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps(async ({ store, req, res, params }) => {
-    const id = params.id;
-
-    await Promise.all([
-        store.dispatch(tagActions.onGetTag(id)),
-        store.dispatch(uiActions.setDrawerActive('Tags'))
-    ]);
-
-    const { tag, ui } = store.getState();
-
-    return {
-        props: {
-            ...serializeStates({ tag, ui }),
-        },
-    };
-});

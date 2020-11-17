@@ -13,15 +13,15 @@ export const getTimestamp = (timestamp) => {
 export const parseTimestamp = (timestamp) => {
     const { year, month, day } = getTimestamp(timestamp);
     return `${year}년 ${month}월 ${day}일`;
-}
+};
 
 export const getNowTimestamp = () => {
     const nowTimestamp = Date.now();
     return nowTimestamp;
-}
+};
 
 export const parseRefreshTimestamp = (loginTime) => {
-    if(!loginTime) return false;
+    if (!loginTime) return false;
     const loginDate = new Date(loginTime);
     const nowDate = new Date(getNowTimestamp());
 
@@ -29,7 +29,7 @@ export const parseRefreshTimestamp = (loginTime) => {
     // console.log(diffTime);
 
     const diffDay = (nowDate.getTime() - loginDate.getTime()) / (1000 * 60 * 60 * 24);
-    if(diffDay > 1) return true;
-    if(diffDay > 0.8 && diffDay < 1) return true;
+    if (diffDay > 1) return true;
+    if (diffDay > 0.8 && diffDay < 1) return true;
     return false;
-}
+};

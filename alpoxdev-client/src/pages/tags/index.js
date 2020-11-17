@@ -1,47 +1,33 @@
 import React from 'react';
 
 // redux
-import { wrapper } from 'stores';
-import { useStore } from 'react-redux';
-import { serializeStates, deserializeState } from 'lib/utils';
-import * as postActions from 'stores/post';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as tagActions from 'stores/tag';
-import * as uiActions from 'stores/ui';
-
-// container
-import TagListContainer from 'container/tags/index';
 
 // components
-import { ReactHelmet } from 'components';
-import { tagListHelmet as helmet } from 'config';
+import { Helmet } from 'components';
 
-export default function TagListPage(props){
-    const { tag, ui } = props;
+// container
+import TagListContainer from 'container/tag/tags';
 
-    const store = useStore();
-    React.useMemo(() => {
-        store.dispatch(tagActions.setTagState(deserializeState(tag)));
-        store.dispatch(uiActions.setUIState(deserializeState(ui)));
-    }, []);
+export default function TagListPage() {
+    const dispatch = useDispatch();
+    const { onGetTags } = bindActionCreators(tagActions, dispatch);
 
-    return(
+    const { tags } = useSelector((state) => ({
+        tags: state.tag.toJS().tags,
+    }));
+    const { data, pending } = tags;
+
+    React.useEffect(() => {
+        if (data?.length === 0 && !pending) onGetTags();
+    }, [data]);
+
+    return (
         <>
-            <ReactHelmet helmet={helmet}/>
-            <TagListContainer/>
+            <Helmet />
+            <TagListContainer />
         </>
-    )
+    );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps(async ({ store, req, res }) => {
-    await Promise.all([
-        store.dispatch(tagActions.onGetTags(true)), 
-        store.dispatch(uiActions.setDrawerActive('Tags'))
-    ]);
-
-    const { tag, ui } = store.getState();
-    return {
-        props: {
-            ...serializeStates({ tag, ui }),
-        },
-    };
-});
