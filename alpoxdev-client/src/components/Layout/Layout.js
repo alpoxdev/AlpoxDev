@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import * as tagActions from 'stores/tag';
 
 // components
-import { Drawer } from 'components';
+import { Drawer, Header } from 'components';
 
 const getActive = (path) => {
     const pathLength = path?.length;
@@ -60,7 +60,10 @@ export default function Layout({ children }) {
 
             <LayoutView>
                 <Drawer tags={data} active={active} />
-                <LayoutContent>{children}</LayoutContent>
+                <LayoutContent>
+                    <Header />
+                    {children}
+                </LayoutContent>
             </LayoutView>
         </>
     );
@@ -81,6 +84,8 @@ const LayoutContent = styled.div`
 
     margin: 0 auto;
     padding: 1rem;
+
+    position: relative;
 
     @media (min-width: 992px) {
         width: 960px;

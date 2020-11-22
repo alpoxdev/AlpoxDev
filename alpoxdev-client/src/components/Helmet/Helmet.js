@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NextSeo, DefaultSeo } from 'next-seo';
 import { defaultHelmet } from 'config';
+
+const getHelmet = (helmet = defaultHelmet) => {
+    return {
+        title: helmet?.title || defaultHelmet?.title,
+        description: helmet?.description || defaultHelmet?.description,
+        image: helmet?.image || defaultHelmet?.image,
+        keywords: helmet?.keywords || defaultHelmet.keywords,
+        url: helmet?.url || defaultHelmet?.url,
+    };
+};
 
 export function DefaultHelmet() {
     const { title, description, image, keywords, url } = defaultHelmet;
@@ -34,7 +44,7 @@ export function DefaultHelmet() {
 }
 
 export function Helmet({ helmet = defaultHelmet, index = true, follow = true }) {
-    const { title, description, image, keywords, url } = helmet;
+    const { title, description, image, keywords, url } = getHelmet(helmet);
 
     return (
         <NextSeo
@@ -53,15 +63,15 @@ export function Helmet({ helmet = defaultHelmet, index = true, follow = true }) 
                         url: image,
                         width: 1200,
                         height: 627,
-                        alt: 'apick.kr',
+                        alt: 'alpox.kr',
                     },
                 ],
                 site_name: title,
             }}
             twitter={{
                 cardType: 'summary_large_image',
-                site: '@apick',
-                handle: '@apick',
+                site: '@alpox',
+                handle: '@alpox',
             }}
         />
     );

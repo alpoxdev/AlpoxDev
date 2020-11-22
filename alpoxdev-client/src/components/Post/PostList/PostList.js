@@ -18,7 +18,7 @@ function PostItem({ post }) {
 
                 <PostContent>
                     <Title>{post?.title}</Title>
-                    <Content>{markdownRemoval(post?.content.slice(200))}</Content>
+                    <Content>{markdownRemoval(post?.content.slice(0, 200))}</Content>
                 </PostContent>
 
                 <PostFooter>

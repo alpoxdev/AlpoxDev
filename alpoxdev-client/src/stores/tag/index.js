@@ -1,22 +1,26 @@
-import { handleActions } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
+import { fromJS } from 'immutable';
 import { tagState } from './state';
 import { TAG_TYPES } from './type';
-import { createPromiseThunk, createPromiseState, setImmutableState, getDataPageAndOffset } from '../redux';
+import {
+    createPromiseThunk,
+    createPromiseState,
+    setImmutableState,
+    getDataPageAndOffset,
+} from '../redux';
 import * as tagAPI from 'services/tag';
 
-export const onGetTags = createPromiseThunk(
-    TAG_TYPES.GET_TAGS,
-    tagAPI.onGetTags,
-    (getState) => getDataPageAndOffset(getState, 'tag', 'tags')
+export const setTagState = createAction(TAG_TYPES.SET_TAG_STATE);
+export const onGetTags = createPromiseThunk(TAG_TYPES.GET_TAGS, tagAPI.onGetTags, (getState) =>
+    getDataPageAndOffset(getState, 'tag', 'tags'),
 );
-
-export const onGetTag = createPromiseThunk(
-    TAG_TYPES.GET_TAG,
-    tagAPI.onGetTag,
-);
+export const onGetTag = createPromiseThunk(TAG_TYPES.GET_TAG, tagAPI.onGetTag);
 
 export default handleActions(
     {
+        [TAG_TYPES.SET_TAG_STATE]: (state, action) => {
+            return fromJS(action.payload);
+        },
         [TAG_TYPES.GET_TAGS]: (state, _) => {
             const pendingState = createPromiseState.pending();
             return setImmutableState(state, 'tags', pendingState);
@@ -40,7 +44,7 @@ export default handleActions(
         [TAG_TYPES.GET_TAG_ERROR]: (state, action) => {
             const errorState = createPromiseState.error(action.payload);
             return setImmutableState(state, 'tag', errorState);
-        }
+        },
     },
-    tagState
-)
+    tagState,
+);

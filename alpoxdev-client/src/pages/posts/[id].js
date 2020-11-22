@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 // redux
+import { wrapper } from 'stores';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as postActions from 'stores/post';
@@ -11,29 +12,42 @@ import PostDetailContainer from 'container/post/detail';
 
 // component
 import { Helmet } from 'components';
+import { postDetailHelmet as helmet } from 'config';
 
-export default function PostDetailPage() {
+export default function PostDetailPage({ post }) {
     const router = useRouter();
     const { id } = router.query;
 
     const dispatch = useDispatch();
-    const { onGetPost } = bindActionCreators(postActions, dispatch);
+    const { setPostState } = bindActionCreators(postActions, dispatch);
 
-    const { post } = useSelector((state) => ({
-        post: state.post.toJS().post,
-    }));
-    const { data, pending } = post;
+    const data = post.post?.data;
 
     React.useEffect(() => {
-        if (id && `${data?.id}` !== id && !pending) {
-            onGetPost({ id });
-        }
-    }, [id]);
+        setPostState(post);
+    }, [post]);
 
     return (
         <>
-            <Helmet />
+            <Helmet
+                helmet={helmet(data?.title, `https://alpox.kr/posts/${data?.id}`, data?.thumbnail)}
+            />
             <PostDetailContainer />
         </>
     );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+    async ({ store, req, res, params, ...etc }) => {
+        const id = params?.id;
+        // console.log(`getServerSideProps`, store.getState());
+        const { dispatch, getState } = store;
+        await dispatch(postActions.onGetPost({ id }));
+
+        const post = getState()?.post.toJS();
+
+        return {
+            props: { post },
+        };
+    },
+);

@@ -57,12 +57,6 @@ export default class MyDocument extends Document {
                         rel="stylesheet"
                         href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.css"
                     />
-                    <link
-                        rel="stylesheet"
-                        href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.6.6/antd.min.css"
-                        integrity="sha512-oj9Gb7rxUS/DmRO4hBFmw984VCy/BlgtLlCoyCaFG23aFz55dgqURNaYzZoVfgdyqVlI8W81ppg2exob2J4SRg=="
-                        crossOrigin="anonymous"
-                    />
                 </Head>
                 <body>
                     <Main />

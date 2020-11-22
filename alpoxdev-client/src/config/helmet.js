@@ -2,7 +2,9 @@ export const defaultHelmet = {
     title: 'AlpoxDev',
     description: 'AlpoxDev Tech Blog',
     image: 'https://alpox.kr/logo.png',
-    keywords: ['React.js', 'Node.js', 'Web', 'App', 'Server', 'html', 'css', 'javascript'].join(' '),
+    keywords: ['React.js', 'Node.js', 'Web', 'App', 'Server', 'html', 'css', 'javascript'].join(
+        ' ',
+    ),
     url: 'https://alpox.kr',
 };
 
@@ -21,25 +23,26 @@ export const registerHelmet = {
 export const postDetailHelmet = (title, url, image) => ({
     title: `${title} - AlpoxDev`,
     url,
-    image
+    image,
 });
 
 export const tagListHelmet = {
-    title : '태그 목록 - AlpoxDev'
-}
+    title: '태그 목록 - AlpoxDev',
+};
 
-export const tagDetailHelmet = (tag) => ({
+export const tagDetailHelmet = (tag, image) => ({
     title: `${tag} - AlpoxDev`,
+    image,
 });
 
 export const aboutHelmet = {
-    title : 'About - AlpoxDev'
-}
+    title: 'About - AlpoxDev',
+};
 
 export const postUploadHelmet = {
-    title : '글 업로드 - AlpoxDev'
-}
+    title: '글 업로드 - AlpoxDev',
+};
 
 export const postUpdateHelmet = (title) => ({
-    title : `${title} 수정 - AlpoxDev`
-})
+    title: `${title} 수정 - AlpoxDev`,
+});

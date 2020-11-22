@@ -7,18 +7,11 @@ import * as authAPI from 'services/auth';
 
 const setUser = ({ dispatch, data }) => {
     console.log(`setUser`, data);
-}
+};
 
-export const onLogin = createPromiseThunk(
-    AUTH_TYPES.LOGIN,
-    authAPI.onLogin,
-    { after: [setUser] }
-);
+export const onLogin = createPromiseThunk(AUTH_TYPES.LOGIN, authAPI.onLogin, { after: [setUser] });
 
-export const onRegister = createPromiseThunk(
-    AUTH_TYPES.REGISTER,
-    authAPI.onRegister
-);
+export const onRegister = createPromiseThunk(AUTH_TYPES.REGISTER, authAPI.onRegister);
 
 export default handleActions(
     {
@@ -45,7 +38,7 @@ export default handleActions(
         [AUTH_TYPES.REGISTER_ERROR]: (state, action) => {
             const errorState = createPromiseState.error(action.payload);
             return setImmutableState(state, 'register', errorState);
-        }
+        },
     },
-    authState
-)
+    authState,
+);

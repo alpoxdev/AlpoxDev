@@ -8,9 +8,11 @@ export const Drawer = styled.div`
     padding-top: calc(120px + 1rem);
     padding-bottom: 25px;
     display: none;
+
     position: fixed;
     top: 0;
     left: 0;
+
     @media (min-width: 1520px) {
         display: block;
     }
