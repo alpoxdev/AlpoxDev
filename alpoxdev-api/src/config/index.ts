@@ -30,6 +30,7 @@ const getEnvValue: getEnvValueType = (
     throw { status: 500, message: 'env type error' };
 };
 
+export const NODE_ENV = getEnvValue('NODE_ENV', 'string');
 export const JWT_SECRET: string = getEnvValue('JWT_SECRET', 'string');
 export const MYSQL = {
     host: getEnvValue('MYSQL_HOST', 'string'),

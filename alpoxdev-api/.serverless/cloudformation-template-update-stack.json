@@ -150,7 +150,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-login",
         "Handler": "handler.login",
@@ -165,6 +165,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -183,14 +184,14 @@
         "LoginLogGroup"
       ]
     },
-    "LoginLambdaVersionNUBl3tnayAMF7eTXnoUlJSfD8Xb4hZ2UUIpyVERvQ": {
+    "LoginLambdaVersionfv2zMBXiVqFvxCxaNPrpRR9ymDddocJY1SCNAKIjqYw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "LoginLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "RegisterLambdaFunction": {
@@ -198,7 +199,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-register",
         "Handler": "handler.register",
@@ -213,6 +214,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -231,14 +233,14 @@
         "RegisterLogGroup"
       ]
     },
-    "RegisterLambdaVersion4qEetsNgnkU4Hrz0kpmKZMWX3ra2zpgTw8cLb7bo": {
+    "RegisterLambdaVersionJmDL1iuCYUj7zdJN2NOgbHDZU3wSMGOVh8ZNupEpOvM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RegisterLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "GetDashpostsLambdaFunction": {
@@ -246,7 +248,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-get-posts",
         "Handler": "handler.getPosts",
@@ -261,6 +263,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -279,14 +282,14 @@
         "GetDashpostsLogGroup"
       ]
     },
-    "GetDashpostsLambdaVersionecfKrdBEXbdnAKrVGSbBV99am3Y3MA5vVNjjJ2ct20": {
+    "GetDashpostsLambdaVersionhlYKnqNh1K9oKJFu8CxLSSq6YX15ewMmEj6IlVGf1pI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashpostsLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "GetDashpostLambdaFunction": {
@@ -294,7 +297,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-get-post",
         "Handler": "handler.getPost",
@@ -309,6 +312,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -327,14 +331,14 @@
         "GetDashpostLogGroup"
       ]
     },
-    "GetDashpostLambdaVersionxqAGk2tB8MSGTznfUQyoXroRs02v7ng7cpZd8BQrA4": {
+    "GetDashpostLambdaVersion9MRrLypcA8BeKU1otv4A4rz5bV8UDcIx3fUe97Zqs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashpostLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "CreateDashpostLambdaFunction": {
@@ -342,7 +346,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-create-post",
         "Handler": "handler.createPost",
@@ -357,6 +361,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -375,14 +380,14 @@
         "CreateDashpostLogGroup"
       ]
     },
-    "CreateDashpostLambdaVersionupMmb0fE0CR4cedEs7IHt45JgPcwSxqEgkjIECENttI": {
+    "CreateDashpostLambdaVersionv0eyxZQvXKvzANb6JUTMR3bt9koOxn9wo12Negc9g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateDashpostLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "DeleteDashpostLambdaFunction": {
@@ -390,7 +395,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-delete-post",
         "Handler": "handler.deletePost",
@@ -405,6 +410,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -423,14 +429,14 @@
         "DeleteDashpostLogGroup"
       ]
     },
-    "DeleteDashpostLambdaVersionjsRRjaLpYSkzYfGIxkGcSaOyMt51wVecHCp7dysVzI": {
+    "DeleteDashpostLambdaVersion9ZWZBykZf0OPxMinAKnR3DrL5nTju1q5nbX803ONI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteDashpostLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "UpdateDashpostLambdaFunction": {
@@ -438,7 +444,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-update-post",
         "Handler": "handler.updatePost",
@@ -453,6 +459,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -471,14 +478,14 @@
         "UpdateDashpostLogGroup"
       ]
     },
-    "UpdateDashpostLambdaVersionWs0GHhhJwmRzRoAhrkcyoZlco3i22xCkiVRLjIYHmJY": {
+    "UpdateDashpostLambdaVersionKrTK620JoEhGDESjLrJutHyP5PwA3E8IwDk3fSjJMv4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateDashpostLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "GetDashtagsLambdaFunction": {
@@ -486,7 +493,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-get-tags",
         "Handler": "handler.getTags",
@@ -501,6 +508,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -519,14 +527,14 @@
         "GetDashtagsLogGroup"
       ]
     },
-    "GetDashtagsLambdaVersionhbO15KUuq7Ue51XAtdb2pBG6kaQSFlzjg8CWBgy8YqY": {
+    "GetDashtagsLambdaVersionoCzk16cEufzvBeEOIHDzFPMusjoZJ5Z8F41Aftdjls": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashtagsLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "GetDashtagLambdaFunction": {
@@ -534,7 +542,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-get-tag",
         "Handler": "handler.getTag",
@@ -549,6 +557,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -567,14 +576,14 @@
         "GetDashtagLogGroup"
       ]
     },
-    "GetDashtagLambdaVersionA2dnF7RgsuHkxfQs2iqT4VQGYutUoStnDhCwU5t12M": {
+    "GetDashtagLambdaVersionigD5wHbnugsGXU4gDcrTGaxJTQRk27TlhLiyr0REKA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashtagLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "DeleteDashtagLambdaFunction": {
@@ -582,7 +591,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-delete-tag",
         "Handler": "handler.deleteTag",
@@ -597,6 +606,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -615,14 +625,14 @@
         "DeleteDashtagLogGroup"
       ]
     },
-    "DeleteDashtagLambdaVersion3j2pDw2UYXwoRhu0NFIRblnyXnRPDLuGDKlRt1xi0": {
+    "DeleteDashtagLambdaVersionQAMbEIZ1SDs2WnM9GVLeW97TLRSS2nu7QGSdPenCdXc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteDashtagLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "UpdateDashtagLambdaFunction": {
@@ -630,7 +640,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "alpoxdev-api",
-          "S3Key": "serverless/alpoxdev-api/prod/1605601635669-2020-11-17T08:27:15.669Z/alpoxdev-api.zip"
+          "S3Key": "serverless/alpoxdev-api/prod/1606112074741-2020-11-23T06:14:34.741Z/alpoxdev-api.zip"
         },
         "FunctionName": "alpoxdev-api-prod-update-tag",
         "Handler": "handler.updateTag",
@@ -645,6 +655,7 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "prod",
             "JWT_SECRET": "ALPOXDEV_API",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "MYSQL_HOST": "database.ciiivo8gm65a.ap-northeast-2.rds.amazonaws.com",
@@ -663,20 +674,20 @@
         "UpdateDashtagLogGroup"
       ]
     },
-    "UpdateDashtagLambdaVersionWVlgmfuRux1ANWxFdjHe1ZwJ8JE43q8kuc1BcWd4hSc": {
+    "UpdateDashtagLambdaVersionSMtk95TsnLR9Ai7OEi5dvO89tllgDEqlhOmhtYNxkI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateDashtagLambdaFunction"
         },
-        "CodeSha256": "Znu5PN71sWdozSG9KWn/gxWPyJ81JOwB9Y76yTFWYHI="
+        "CodeSha256": "+EtwN8KRBBZ7gFS7R7anzx94JQ2UcDSvVpDh8v/6T5Y="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "prod-alpoxdev-api",
+        "Name": "alpoxdev-api-prod",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -1521,7 +1532,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1605601619248": {
+    "ApiGatewayDeployment1606112051208": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1964,67 +1975,67 @@
     "LoginLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LoginLambdaVersionNUBl3tnayAMF7eTXnoUlJSfD8Xb4hZ2UUIpyVERvQ"
+        "Ref": "LoginLambdaVersionfv2zMBXiVqFvxCxaNPrpRR9ymDddocJY1SCNAKIjqYw"
       }
     },
     "RegisterLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RegisterLambdaVersion4qEetsNgnkU4Hrz0kpmKZMWX3ra2zpgTw8cLb7bo"
+        "Ref": "RegisterLambdaVersionJmDL1iuCYUj7zdJN2NOgbHDZU3wSMGOVh8ZNupEpOvM"
       }
     },
     "GetDashpostsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashpostsLambdaVersionecfKrdBEXbdnAKrVGSbBV99am3Y3MA5vVNjjJ2ct20"
+        "Ref": "GetDashpostsLambdaVersionhlYKnqNh1K9oKJFu8CxLSSq6YX15ewMmEj6IlVGf1pI"
       }
     },
     "GetDashpostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashpostLambdaVersionxqAGk2tB8MSGTznfUQyoXroRs02v7ng7cpZd8BQrA4"
+        "Ref": "GetDashpostLambdaVersion9MRrLypcA8BeKU1otv4A4rz5bV8UDcIx3fUe97Zqs"
       }
     },
     "CreateDashpostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateDashpostLambdaVersionupMmb0fE0CR4cedEs7IHt45JgPcwSxqEgkjIECENttI"
+        "Ref": "CreateDashpostLambdaVersionv0eyxZQvXKvzANb6JUTMR3bt9koOxn9wo12Negc9g"
       }
     },
     "DeleteDashpostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteDashpostLambdaVersionjsRRjaLpYSkzYfGIxkGcSaOyMt51wVecHCp7dysVzI"
+        "Ref": "DeleteDashpostLambdaVersion9ZWZBykZf0OPxMinAKnR3DrL5nTju1q5nbX803ONI"
       }
     },
     "UpdateDashpostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateDashpostLambdaVersionWs0GHhhJwmRzRoAhrkcyoZlco3i22xCkiVRLjIYHmJY"
+        "Ref": "UpdateDashpostLambdaVersionKrTK620JoEhGDESjLrJutHyP5PwA3E8IwDk3fSjJMv4"
       }
     },
     "GetDashtagsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashtagsLambdaVersionhbO15KUuq7Ue51XAtdb2pBG6kaQSFlzjg8CWBgy8YqY"
+        "Ref": "GetDashtagsLambdaVersionoCzk16cEufzvBeEOIHDzFPMusjoZJ5Z8F41Aftdjls"
       }
     },
     "GetDashtagLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashtagLambdaVersionA2dnF7RgsuHkxfQs2iqT4VQGYutUoStnDhCwU5t12M"
+        "Ref": "GetDashtagLambdaVersionigD5wHbnugsGXU4gDcrTGaxJTQRk27TlhLiyr0REKA"
       }
     },
     "DeleteDashtagLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteDashtagLambdaVersion3j2pDw2UYXwoRhu0NFIRblnyXnRPDLuGDKlRt1xi0"
+        "Ref": "DeleteDashtagLambdaVersionQAMbEIZ1SDs2WnM9GVLeW97TLRSS2nu7QGSdPenCdXc"
       }
     },
     "UpdateDashtagLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateDashtagLambdaVersionWVlgmfuRux1ANWxFdjHe1ZwJ8JE43q8kuc1BcWd4hSc"
+        "Ref": "UpdateDashtagLambdaVersionSMtk95TsnLR9Ai7OEi5dvO89tllgDEqlhOmhtYNxkI"
       }
     },
     "ServiceEndpoint": {
