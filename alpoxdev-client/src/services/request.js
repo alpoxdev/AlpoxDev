@@ -39,7 +39,8 @@ export default class Request {
     }
 
     static getEndpoint() {
-        return 'https://api.alpox.kr';
+        // return 'http://localhost:8080';
+        return 'https://api.alpox.dev';
     }
 
     static getAuthorizationHeader(accessToken) {

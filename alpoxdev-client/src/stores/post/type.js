@@ -2,6 +2,7 @@ import { TYPE_DONE, TYPE_ERROR } from '../utils';
 
 export const POST_TYPES = {
     SET_POST_STATE: 'post/SET_POST_STATE',
+    RESET: 'post/RESET',
 
     GET_POSTS: 'post/GET_POSTS',
     GET_POSTS_DONE: TYPE_DONE('post/GET_POSTS'),

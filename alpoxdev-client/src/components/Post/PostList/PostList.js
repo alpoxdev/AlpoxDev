@@ -45,6 +45,7 @@ const PostListView = styled.div`
 
 const PostItemView = styled.div`
     width: calc(100% - 30px);
+    max-width: 386px;
     min-height: 361.89px;
     margin: 15px;
 

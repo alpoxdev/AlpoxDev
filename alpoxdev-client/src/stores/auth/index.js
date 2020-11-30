@@ -3,15 +3,18 @@ import { createPromiseThunk, createPromiseState, setImmutableState } from '../re
 
 import { authState } from './state';
 import { AUTH_TYPES } from './type';
+import { USER_TYPES } from '../user/type';
 import * as authAPI from 'services/auth';
 
 const setUser = ({ dispatch, data }) => {
-    console.log(`setUser`, data);
+    dispatch({ type: USER_TYPES.SET_LOGINED, payload: data });
 };
 
 export const onLogin = createPromiseThunk(AUTH_TYPES.LOGIN, authAPI.onLogin, { after: [setUser] });
 
-export const onRegister = createPromiseThunk(AUTH_TYPES.REGISTER, authAPI.onRegister);
+export const onRegister = createPromiseThunk(AUTH_TYPES.REGISTER, authAPI.onRegister, {
+    after: [setUser],
+});
 
 export default handleActions(
     {
@@ -20,7 +23,7 @@ export default handleActions(
             return setImmutableState(state, 'login', pendingState);
         },
         [AUTH_TYPES.LOGIN_DONE]: (state, _) => {
-            const doneState = createPromiseState.done(null);
+            const doneState = createPromiseState.done({});
             return setImmutableState(state, 'login', doneState);
         },
         [AUTH_TYPES.LOGIN_ERROR]: (state, action) => {

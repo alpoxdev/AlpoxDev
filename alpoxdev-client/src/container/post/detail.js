@@ -12,14 +12,15 @@ import {
 } from 'components';
 
 export default function PostDetailContainer() {
-    const { post } = useSelector((state) => ({
+    const { post, logined } = useSelector((state) => ({
         post: state.post.toJS().post,
+        logined: state.user.toJS().logined,
     }));
     const { data, pending } = post;
 
     return (
         <>
-            <PostDetailHeader post={data} />
+            <PostDetailHeader post={data} user={logined?.user} />
             <PostDetailTagList tags={data?.tags} />
             <PostDetailContent post={data} />
             <PostDetailDisqus id={data?.id} title={data?.title} />
