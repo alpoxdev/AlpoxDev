@@ -10,6 +10,7 @@ import { signToken } from '../services';
 
 export enum Role {
     USER = 'user',
+    MEMBER = 'member',
     ADMIN = 'admin',
 }
 

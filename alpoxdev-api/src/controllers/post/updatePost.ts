@@ -1,6 +1,6 @@
 import { createGatewayProxyHandler, Request, Response } from '../../services';
 import { connectDatabase, Tag } from '../../models';
-import { AdminAuthorizer } from '../../middlewares';
+import { SelfMemberAuthorizer } from '../../middlewares';
 
 export const updatePost = createGatewayProxyHandler(
     async (req: Request, res: Response) => {
@@ -8,10 +8,11 @@ export const updatePost = createGatewayProxyHandler(
         const { title, content, thumbnail, tags } = req.body;
 
         const { models } = await connectDatabase();
-        await AdminAuthorizer(req);
 
         const findPost = await models.Post.findOne(id);
         if (!findPost) throw { status: 404, message: 'NotFound post' };
+
+        await SelfMemberAuthorizer(req, findPost?.user);
 
         findPost.title = title || findPost.title;
         findPost.content = content || findPost.content;

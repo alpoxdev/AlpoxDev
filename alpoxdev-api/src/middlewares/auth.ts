@@ -45,8 +45,32 @@ export const AdminAuthorizer = async (req: Request) => {
     }
 };
 
+export const MemberAuthorizer = async (req: Request) => {
+    const user = await Authorizer(req);
+    const isMember = user?.role === 'member' || user?.role === 'admin';
+
+    if (isMember) {
+        return user;
+    } else {
+        throw {
+            status: 401,
+            message: 'Authorization Failure: No Member Permission',
+        };
+    }
+};
+
 export const SelfAuthorizer = async (req: Request, compareUser: User) => {
     const user = await Authorizer(req);
+
+    if (user?.id === compareUser?.id || user?.role === 'admin') {
+        return user;
+    } else {
+        throw { status: 401, message: 'Authorization Failure: No Permission' };
+    }
+};
+
+export const SelfMemberAuthorizer = async (req: Request, compareUser: User) => {
+    const user = await MemberAuthorizer(req);
 
     if (user?.id === compareUser?.id || user?.role === 'admin') {
         return user;

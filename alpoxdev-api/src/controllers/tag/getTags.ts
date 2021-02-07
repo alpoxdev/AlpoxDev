@@ -6,17 +6,19 @@ export const getTags = createGatewayProxyHandler(
         const { page, offset } = req.query;
         const { models } = await connectDatabase();
 
-        const tags = await models.Tag.createQueryBuilder('tag')
+        const query = models.Tag.createQueryBuilder('tag')
             .leftJoin('tag.posts', 'posts')
             .select('tag.id', 'id')
             .addSelect('tag.tag', 'tag')
             .addSelect('COUNT(DISTINCT(posts.id)) as posts')
             .orderBy('posts', 'DESC')
-            .groupBy('tag.id')
-            .offset(page * offset)
-            .limit(offset)
+            .groupBy('tag.id');
+        const tags = await query
+            .skip(page * offset)
+            .take(offset)
             .getRawMany();
+        const count = await query.getCount();
 
-        return res({ status: 200, body: { tags } });
+        return res({ status: 200, body: { tags, count } });
     }
 );

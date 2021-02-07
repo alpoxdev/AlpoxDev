@@ -1,13 +1,13 @@
 import { createGatewayProxyHandler, Request, Response } from '../../services';
 import { connectDatabase, Post, Tag } from '../../models';
-import { AdminAuthorizer } from '../../middlewares';
+import { MemberAuthorizer } from '../../middlewares';
 
 export const createPost = createGatewayProxyHandler(
     async (req: Request, res: Response) => {
         const { title, content, thumbnail, tags } = req.body;
 
         const { models } = await connectDatabase();
-        const user = await AdminAuthorizer(req);
+        const user = await MemberAuthorizer(req);
 
         const post = new Post();
         post.title = title;
