@@ -3,17 +3,13 @@ import React, { useCallback } from 'react';
 import { inject, observer } from 'mobx-react';
 import { getSnapshot } from 'mobx-state-tree';
 import { initializeStore, MSTProps } from 'stores';
-import { PostList } from 'components';
+
+// container
+import { PostListContainer } from 'containers';
+// import { PostList } from 'components';
 
 export const PostListPage = ({ store }: MSTProps): JSX.Element => {
-  const { postStore } = store;
-  const { posts } = postStore;
-
-  return (
-    <>
-      <PostList posts={posts.data} />
-    </>
-  );
+  return <PostListContainer store={store} />;
 };
 
 export async function getServerSideProps(context) {

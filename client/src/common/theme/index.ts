@@ -1,10 +1,17 @@
 import { Theme } from '@emotion/react';
 
+export enum FontSize {
+  title = '24px',
+  subtitle = '20px',
+  content = '16px',
+  info = '14px',
+}
+
 export const theme: Theme = {
   color: {
     primary: '#FF4A43',
     subPrimary: 'rgba(106, 99, 221, 0.15)',
-    background: '#f7f8fb',
+    background: 'rgb(247, 248, 251)',
     text: '#000000',
     textBoldInfo: '#8D8D8D',
     textInfo: '#C6C6C8',
@@ -12,13 +19,13 @@ export const theme: Theme = {
     buttonBoldBackground: '#C8C8C8',
   },
   fontSize: {
-    title: 24,
-    subtitle: 16,
-    normal: 14,
-    info: 12,
+    title: '24px',
+    subtitle: '20px',
+    content: '16px',
+    info: '14px',
   },
   fontFamily: {
-    primary: '',
+    primary: 'San Francisco',
     logo: '',
   },
 };

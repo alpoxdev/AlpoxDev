@@ -1,13 +1,13 @@
 export type HelmetProps = {
-    title: string;
-    description?: string;
-    image?: string;
-    url?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  url?: string;
 };
 
 export const defaultHelmet: HelmetProps = {
-    title: 'Next.js MST Boilerplate',
-    description: 'react, next.js, mst, and seo optimization',
-    image: '',
-    url: '',
+  title: 'AlpoxDev',
+  description: 'Hi, This is Alpox.',
+  image: '/logo.png',
+  url: 'https://alpox.dev',
 };
