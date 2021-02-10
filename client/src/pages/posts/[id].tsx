@@ -1,21 +1,46 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
+// stores
 import { inject, observer } from 'mobx-react';
-import { getSnapshot } from 'mobx-state-tree';
 import { initializeStore, MSTProps } from 'stores';
-import { PostList } from 'components';
-import posts from '.';
 
-const PostDetailPage = ({ store }): JSX.Element => {
+// helmet
+import { Helmet } from 'components';
+import { customHelmet as helmet } from 'common/helmet';
+
+// containers
+import { PostDetailContainer } from 'containers';
+
+// utils
+import { deleteUndefinedInStore } from 'utils';
+
+const PostDetailPage = ({ store }: MSTProps): JSX.Element => {
+  const router = useRouter();
+  const id = router.query?.id;
+
   const { postStore } = store;
   const { post } = postStore;
 
+  const onGetPost = useCallback(() => {
+    postStore.onGetPost({ id });
+  }, [id]);
+
+  useEffect(() => {
+    onGetPost();
+  }, [id, onGetPost]);
+
   return (
-    <div>
-      <div>제목: {post.data.title}</div>
-      <div>부제목: {post.data.subtitle}</div>
-      <div>내용: {post.data.content}</div>
-    </div>
+    <>
+      <Helmet
+        helmet={helmet({
+          title: `${post.data?.title} - AlpoxDev`,
+          description: post.data?.content,
+          image: post.data?.thumbnail || null,
+        })}
+      />
+      <PostDetailContainer store={store} />
+    </>
   );
 };
 
@@ -27,7 +52,7 @@ export async function getServerSideProps({ params }) {
 
   await postStore.onGetPost({ id });
 
-  return { props: { initialState: getSnapshot(store) } };
+  return { props: { initialState: deleteUndefinedInStore(store) } };
 }
 
 export default inject('store')(observer(PostDetailPage));

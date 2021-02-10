@@ -1,5 +1,6 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { isSSR } from 'utils';
 
 const ENDPOINT = 'https://e2ymj1zrwk.execute-api.ap-northeast-2.amazonaws.com/dev';
 const instance = axios.create({});
@@ -11,10 +12,19 @@ export type ResponseData = { [type: string]: any } | any;
 
 export enum RequestMethod {
   get = 'GET',
+  GET = 'GET',
+
   post = 'POST',
+  POST = 'POST',
+
   delete = 'DELETE',
+  DELETE = 'DELETE',
+
   patch = 'PATCH',
+  PATCH = 'PATCH',
+
   put = 'PUT',
+  PUT = 'PUT',
 }
 
 export type RequestProps = {
@@ -40,24 +50,34 @@ export const onParseQuery = (query?: Query): string => {
 export const onRequest = async (props: RequestProps): Promise<Response> => {
   const { method } = props;
   props = { ...props, url: ENDPOINT + props.url };
+  !isSSR() && console.log('onRequest', props);
 
-  console.log('onRequest', props);
+  let response: Response;
 
   try {
     switch (method) {
       case RequestMethod.get:
-        return await onRequestGet(props);
+        response = await onRequestGet(props);
+        break;
       case RequestMethod.post:
-        return await onRequestPost(props);
+        response = await onRequestPost(props);
+        break;
       case RequestMethod.delete:
-        return await onRequestDelete(props);
+        response = await onRequestDelete(props);
+        break;
       case RequestMethod.patch:
-        return await onRequestPatch(props);
+        response = await onRequestPatch(props);
+        break;
       case RequestMethod.put:
-        return await onRequestPut(props);
+        response = await onRequestPut(props);
+        break;
       default:
-        return await onRequestGet(props);
+        response = await onRequestGet(props);
+        break;
     }
+
+    !isSSR() && console.log(`onRequest Response ${props.url}`, response.data);
+    return response;
   } catch (error) {
     return { status: 500 } as Response;
   }

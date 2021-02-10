@@ -3,10 +3,12 @@ import { getSnapshot } from 'mobx-state-tree';
 import { initializeStore, MSTProps } from 'stores';
 
 import { PostListPage } from 'pages/posts';
+import { Introduce } from 'components';
 
 const IndexPage = ({ store }: MSTProps): JSX.Element => {
   return (
     <>
+      <Introduce />
       <PostListPage store={store} />
     </>
   );
@@ -14,9 +16,10 @@ const IndexPage = ({ store }: MSTProps): JSX.Element => {
 
 export async function getServerSideProps(context) {
   const store = initializeStore();
-  const { postStore } = store;
+  const { postStore, tagStore } = store;
 
   await postStore.onGetPosts({});
+  await tagStore.onGetTags({});
 
   return { props: { initialState: getSnapshot(store) } };
 }

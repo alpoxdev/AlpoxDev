@@ -11,3 +11,10 @@ export const defaultHelmet: HelmetProps = {
   image: '/logo.png',
   url: 'https://alpox.dev',
 };
+
+export const customHelmet = (props: HelmetProps): HelmetProps => ({
+  title: props.title || defaultHelmet.title,
+  description: props.description || defaultHelmet.description,
+  image: props.image || defaultHelmet.image,
+  url: props.url || defaultHelmet.url,
+});

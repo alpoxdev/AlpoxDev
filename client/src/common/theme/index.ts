@@ -9,7 +9,7 @@ export enum FontSize {
 
 export const theme: Theme = {
   color: {
-    primary: '#FF4A43',
+    primary: 'rgb(106, 99, 221)',
     subPrimary: 'rgba(106, 99, 221, 0.15)',
     background: 'rgb(247, 248, 251)',
     text: '#000000',

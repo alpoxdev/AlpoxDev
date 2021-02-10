@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 
 import { Text, Divider } from 'components';
@@ -22,22 +23,24 @@ export const PostList = ({ posts }: IPostList) => {
 
 const PostItem = ({ post }: IPostItem) => {
   return (
-    <PostItemView>
-      <Thumbnail
-        src={
-          'https://user-images.githubusercontent.com/29870990/46203755-bcaeaa00-c355-11e8-81f1-4802fa47682b.jpg'
-        }
-      />
-      <Divider color="#ddd" />
+    <Link href="/posts/:id" as={`/posts/${post.id}`}>
+      <PostItemView>
+        <Thumbnail
+          src={
+            'https://user-images.githubusercontent.com/29870990/46203755-bcaeaa00-c355-11e8-81f1-4802fa47682b.jpg'
+          }
+        />
+        <Divider color="#ddd" />
 
-      <ContentWrapper>
-        <Title>{post.title}</Title>
-        <SubTitle>{post.subtitle}</SubTitle>
-        <InfoWrapper>
-          <CreatedAt fontSize={FontSize.info}>{onGetDateFormat(post.createdAt)}</CreatedAt>
-        </InfoWrapper>
-      </ContentWrapper>
-    </PostItemView>
+        <ContentWrapper>
+          <Title>{post.title}</Title>
+          <SubTitle>{post.subtitle}</SubTitle>
+          <InfoWrapper>
+            <CreatedAt fontSize={FontSize.info}>{onGetDateFormat(post.createdAt)}</CreatedAt>
+          </InfoWrapper>
+        </ContentWrapper>
+      </PostItemView>
+    </Link>
   );
 };
 
@@ -105,9 +108,20 @@ const PostItemView = styled.article`
 
 const Thumbnail = styled.img`
   width: 100%;
-  max-height: 250px;
 
   object-fit: contain;
+
+  @media (max-width: 575.98px) {
+    max-height: 190px;
+  }
+
+  @media (min-width: 576px) and (max-width: 992px) {
+    height: 220px;
+  }
+
+  @media (min-width: 993px) {
+    height: 250px;
+  }
 `;
 
 const ContentWrapper = styled.div`
