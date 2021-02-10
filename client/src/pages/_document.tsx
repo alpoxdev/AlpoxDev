@@ -21,7 +21,13 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link rel="stylesheet prefetch" href="/sf_pro.css" />
+          <link rel="stylesheet prefetch" href="/reset.css" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Amiri:ital@1&display=swap"
+            rel="stylesheet prefetch"
+          />
         </Head>
         <body>
           <Main />

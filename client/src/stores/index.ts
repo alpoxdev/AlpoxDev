@@ -16,7 +16,7 @@ useStaticRendering(isServer);
 
 export const Store = types.model({
   postStore: types.optional(PostStore, {}),
-  CategoryStore: types.optional(CategoryStore, {}),
+  categoryStore: types.optional(CategoryStore, {}),
   seriesStore: types.optional(SeriesStore, {}),
   tagStore: types.optional(TagStore, {}),
 });

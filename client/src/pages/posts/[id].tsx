@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 // stores
 import { inject, observer } from 'mobx-react';
 import { initializeStore, MSTProps } from 'stores';
+import { AsyncStatus } from 'common/mst';
 
 // helmet
 import { Helmet } from 'components';
@@ -23,12 +24,16 @@ const PostDetailPage = ({ store }: MSTProps): JSX.Element => {
   const { post } = postStore;
 
   const onGetPost = useCallback(() => {
-    postStore.onGetPost({ id });
-  }, [id]);
+    if (post.status !== AsyncStatus.ready) postStore.onGetPost({ id });
+  }, [id, post.status]);
 
   useEffect(() => {
     onGetPost();
   }, [id, onGetPost]);
+
+  useEffect(() => {
+    return () => post.onDefault();
+  }, []);
 
   return (
     <>

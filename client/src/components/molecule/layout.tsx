@@ -29,7 +29,7 @@ const LayoutHeaderWrapper = styled.div`
   padding: 0 21px;
 
   background-color: rgb(247, 248, 251);
-  box-shadow: 3px 2px 14px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #eaeaea;
 
   position: fixed;
   top: 0;
@@ -42,6 +42,9 @@ const LayoutHeader = styled.div`
   width: 1080px;
   margin: 0 auto;
   padding: 0 21px;
+
+  display: flex;
+  align-items: center;
 `;
 
 const Logo = styled(Text)`

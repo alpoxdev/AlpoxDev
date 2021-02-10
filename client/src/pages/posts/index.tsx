@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 
 import { inject, observer } from 'mobx-react';
 import { initializeStore, MSTProps } from 'stores';
+import { AsyncStatus } from 'common/mst';
 
 // container
 import { PostListContainer } from 'containers';
@@ -13,9 +14,9 @@ export const PostListPage = ({ store }: MSTProps): JSX.Element => {
   const { postStore, tagStore } = store;
 
   const onGetInit = useCallback(() => {
-    postStore.onGetPosts({});
-    tagStore.onGetTags({});
-  }, []);
+    if (postStore.posts.status !== AsyncStatus.ready) postStore.onGetPosts({});
+    if (tagStore.tags.status !== AsyncStatus.ready) tagStore.onGetTags({});
+  }, [postStore.posts.status, tagStore.tags.status]);
 
   useEffect(() => {
     onGetInit();

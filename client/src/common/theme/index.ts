@@ -26,7 +26,7 @@ export const theme: Theme = {
   },
   fontFamily: {
     primary: 'San Francisco',
-    logo: '',
+    logo: 'Amiri',
   },
 };
 
