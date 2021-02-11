@@ -5,3 +5,4 @@ export * from './category';
 export * from './series';
 export * from './tag';
 export * from './modal';
+export * from './auth';

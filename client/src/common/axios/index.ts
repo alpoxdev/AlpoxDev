@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import queryString from 'query-string';
 import { isSSR } from 'utils';
 
 const ENDPOINT = 'https://e2ymj1zrwk.execute-api.ap-northeast-2.amazonaws.com/dev';
-const instance = axios.create({});
+let instance = axios.create({});
 
 export type Header = { [type: string]: string };
 export type Query = { [type: string]: any };
@@ -40,6 +40,10 @@ export type Response = {
   data: ResponseData | null;
 };
 export type Error = Response;
+
+export const onRefreshAxios = (axiosInstance: AxiosInstance) => {
+  instance = axiosInstance;
+};
 
 export const onParseQuery = (query?: Query): string => {
   if (!query) return '';
@@ -79,6 +83,7 @@ export const onRequest = async (props: RequestProps): Promise<Response> => {
     !isSSR() && console.log(`onRequest Response ${props.url}`, response.data);
     return response;
   } catch (error) {
+    !isSSR() && console.log('onRequest Error', error?.response);
     return { status: 500 } as Response;
   }
 };

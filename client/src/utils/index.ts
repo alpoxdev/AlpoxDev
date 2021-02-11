@@ -1,9 +1,12 @@
+import axios, { AxiosInstance } from 'axios';
 import { getSnapshot } from 'mobx-state-tree';
 
 import unified from 'unified';
 import markdown from 'remark-parse';
 import remark2rehype from 'remark-rehype';
 import html from 'rehype-stringify';
+
+import jwtDecode from 'jwt-decode';
 
 import { IStore } from 'stores';
 
@@ -51,4 +54,14 @@ export const onParseMarkdown = (content: string): undefined | string => {
     });
 
   return parsed;
+};
+
+export const onParseJWT = (accessToken: string): any => {
+  return jwtDecode(accessToken);
+};
+
+export const onCreateAxiosInstanceWithToken = (accessToken: string): AxiosInstance => {
+  return axios.create({
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
 };

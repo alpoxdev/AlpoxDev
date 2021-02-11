@@ -15,7 +15,9 @@ export const SeriesStore = types
     onGetSeriesList: (props?) =>
       self.seriesList.onGetAll(() => SeriesRepository.onGetSeriesList(props), 'series'),
     onGetMoreSeriesList: (props?) =>
-      self.seriesList.onGetAll(() => SeriesRepository.onGetSeriesList(props), 'series', true),
+      self.seriesList.onGetAll(() => SeriesRepository.onGetSeriesList(props), 'series', {
+        isMore: true,
+      }),
     onGetSeries: (props?) =>
       self.series.onGetOne(() => SeriesRepository.onGetSeries(props), 'series'),
   }));

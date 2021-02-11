@@ -14,7 +14,7 @@ export const PostStore = types
   .actions((self) => ({
     onGetPosts: (props?) => self.posts.onGetAll(() => PostRepository.onGetPosts(props), 'posts'),
     onGetMorePosts: (props?) =>
-      self.posts.onGetAll(() => PostRepository.onGetPosts(props), 'posts', true),
+      self.posts.onGetAll(() => PostRepository.onGetPosts(props), 'posts', { isMore: true }),
     onGetPost: (props?) => self.post.onGetOne(() => PostRepository.onGetPost(props), 'post'),
   }));
 

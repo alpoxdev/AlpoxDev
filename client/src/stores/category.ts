@@ -10,7 +10,7 @@ import {
 } from 'common/models';
 
 export const CategoryStore = types
-  .model('TagStore', {
+  .model('CategoryStore', {
     categories,
     category,
     createCategory,
@@ -26,6 +26,6 @@ export const CategoryStore = types
 
 const categoryStore = CategoryStore.create();
 
-export type ICategoryStore = Instance<typeof CategoryStore>;
+export type ICategoryStore = Instance<typeof categoryStore>;
 
 export default categoryStore;

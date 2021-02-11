@@ -1,19 +1,25 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { Text } from 'components';
+import { Text, Skeleton } from 'components';
 import { PostProps } from 'common/types';
 import { FontSize } from 'common/theme';
 
 const Header = ({ post }: PostProps): JSX.Element => {
+  //   post = null;
   return (
     <>
       <HeaderWrapper>
-        <Title fontSize={FontSize.title}>{post?.title}</Title>
+        <Skeleton width={200} height={45} view={!post}>
+          <Title fontSize={FontSize.title}>{post?.title}</Title>
+        </Skeleton>
       </HeaderWrapper>
 
       <UserWrapper>
-        <Profile src="/logo.png" />
+        <Skeleton width={30} height={30} circle view={!post}>
+          <Profile src="/logo.png" />
+        </Skeleton>
+
         <Name>{post?.user?.nickname}</Name>
       </UserWrapper>
     </>

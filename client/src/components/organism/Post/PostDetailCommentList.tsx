@@ -32,7 +32,7 @@ const PostDetailCommentList = ({
 
       onCreateComment(comment);
     },
-    [comment],
+    [comment, onCreateComment],
   );
 
   const onCancel = useCallback(() => {
@@ -44,12 +44,12 @@ const PostDetailCommentList = ({
       <CommentForm onSubmit={onSubmit}>
         <CommentInput placeholder="댓글을 작성해주세요..." value={comment} onChange={onChange} />
         <ButtonWrapper>
-          <CancelButton isAuto onClick={onCancel}>
-            취소
-          </CancelButton>
           <CommentButton isAuto primary onClick={onSubmit}>
             작성{isCreatePending && '중...'}
           </CommentButton>
+          <CancelButton isAuto onClick={onCancel}>
+            취소
+          </CancelButton>
         </ButtonWrapper>
       </CommentForm>
       <CommentList>{commentList}</CommentList>

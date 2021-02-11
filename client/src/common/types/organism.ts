@@ -1,3 +1,4 @@
+import React from 'react';
 import { IPost, IComment } from 'common/models';
 
 export interface PostProps {
@@ -18,4 +19,9 @@ export interface CommentsProps {
 export interface CommentListProps extends CommentsProps {
   onCreateComment: (content: string) => void;
   isCreatePending: boolean;
+}
+
+export interface PostCreateTextAreaProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
