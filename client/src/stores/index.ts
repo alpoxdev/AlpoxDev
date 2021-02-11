@@ -8,6 +8,8 @@ import { PostStore } from 'stores/post';
 import { CategoryStore } from 'stores/category';
 import { SeriesStore } from 'stores/series';
 import { TagStore } from 'stores/tag';
+import { CommentStore } from 'stores/comment';
+import { ModalStore } from 'stores/modal';
 
 const isServer = typeof window === 'undefined';
 let store: IStore | null = null;
@@ -19,6 +21,8 @@ export const Store = types.model({
   categoryStore: types.optional(CategoryStore, {}),
   seriesStore: types.optional(SeriesStore, {}),
   tagStore: types.optional(TagStore, {}),
+  commentStore: types.optional(CommentStore, {}),
+  modalStore: types.optional(ModalStore, {}),
 });
 
 export type IStore = Instance<typeof Store>;

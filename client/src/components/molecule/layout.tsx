@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import styled from '@emotion/styled';
+
 import { Text } from 'components';
 import { FontSize } from 'common/theme';
 
-export const Layout: React.FC = ({ children }) => {
+// stores
+import { useStore } from 'stores';
+import { AsyncStatus } from 'common/mst';
+
+// components
+import { Modal } from 'components';
+
+export const Layout = ({ children }) => {
+  const store = useStore();
+  const { tagStore } = store;
+  const { tags } = tagStore;
+
+  const onGetTags = useCallback(() => {
+    if (tags.status !== AsyncStatus.ready) tagStore.onGetTags({});
+  }, [tags.status]);
+
+  useEffect(() => {
+    onGetTags();
+  }, [onGetTags]);
+
   return (
     <LayoutWrapper>
       <LayoutHeaderWrapper>
         <LayoutHeader>
-          <Logo fontSize={FontSize.title}>AlpoxDev</Logo>
+          <Link href="/">
+            <Logo fontSize={FontSize.title}>AlpoxDev</Logo>
+          </Link>
         </LayoutHeader>
       </LayoutHeaderWrapper>
 
       <LayoutContent>{children}</LayoutContent>
+
+      <Modal />
     </LayoutWrapper>
   );
 };
@@ -49,6 +74,7 @@ const LayoutHeader = styled.div`
 
 const Logo = styled(Text)`
   margin-left: 5px;
+  cursor: pointer;
 `;
 
 const LayoutContent = styled.div`

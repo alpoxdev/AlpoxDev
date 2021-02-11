@@ -1,6 +1,6 @@
 import { Instance, types } from 'mobx-state-tree';
 import { createAsyncModel, createAsyncModels, EmptyModel } from 'common/mst';
-import { User } from 'common/models';
+import { User, Comment } from 'common/models';
 
 export const Post = types.model('Post', {
   id: types.maybe(types.number),
@@ -12,6 +12,7 @@ export const Post = types.model('Post', {
   createdAt: types.maybe(types.string),
 
   user: types.optional(types.maybe(User), undefined),
+  comments: types.optional(types.array(Comment), []),
 });
 
 export const posts = createAsyncModels('Posts', Post);

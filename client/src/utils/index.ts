@@ -1,4 +1,10 @@
 import { getSnapshot } from 'mobx-state-tree';
+
+import unified from 'unified';
+import markdown from 'remark-parse';
+import remark2rehype from 'remark-rehype';
+import html from 'rehype-stringify';
+
 import { IStore } from 'stores';
 
 export const isSSR = () => {
@@ -31,4 +37,18 @@ export const onGetDateFormat = (dateString: string): string => {
 
 export const deleteUndefinedInStore = (store: IStore): void => {
   return JSON.parse(JSON.stringify(getSnapshot(store)));
+};
+
+export const onParseMarkdown = (content: string): undefined | string => {
+  let parsed: undefined | string;
+
+  unified()
+    .use(markdown)
+    .use(remark2rehype)
+    .use(html)
+    .process(content, function (err, file) {
+      parsed = String(file);
+    });
+
+  return parsed;
 };

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 
 import Prism from 'prismjs';
-import marked from 'marked';
+import { onParseMarkdown } from 'utils';
 
 import 'prismjs/components/prism-bash.min.js'; // bash
 import 'prismjs/components/prism-json.min.js'; // json
@@ -19,40 +19,16 @@ import 'prismjs/components/prism-tsx.min.js'; // tsx
 import 'prismjs/components/prism-go.min.js'; // tsx
 import 'prismjs/components/prism-scss.min.js'; // scss
 import 'prismjs/components/prism-css.min.js'; // css
-
-const renderer = new marked.Renderer();
-
-renderer.code = function (code, lang) {
-  code = this.options.highlight(code, lang);
-  if (!lang) {
-    return `<pre><code>${code}</code></pre>`;
-  }
-
-  const langClass = `language-${lang}`;
-  return `<pre class="${langClass}"><code class="${langClass}">${code}</code></pre>`;
-};
-
-marked.setOptions({
-  renderer,
-  highlight(code, lang) {
-    try {
-      return Prism.highlight(code, Prism.languages[lang], lang);
-    } catch {
-      return code;
-    }
-  },
-});
-
 export default class PostDetailContent extends Component<{ content: string }> {
-  componentDidMount() {
+  componentDidMount(): void {
     Prism.highlightAll();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     Prism.highlightAll();
   }
 
-  render() {
+  render(): JSX.Element {
     const { content } = this.props;
 
     return (
@@ -73,7 +49,7 @@ export default class PostDetailContent extends Component<{ content: string }> {
         </Head>
         <ContentDiv
           className="markdown-body"
-          dangerouslySetInnerHTML={{ __html: marked(content) }}
+          dangerouslySetInnerHTML={{ __html: onParseMarkdown(content) }}
         />
       </>
     );
@@ -83,7 +59,11 @@ export default class PostDetailContent extends Component<{ content: string }> {
 const ContentDiv = styled.div`
   margin-top: 30px;
 
-  .markdown-body pre[class*='language-'] {
+  &.markdown-body {
     font-size: 14px;
+  }
+
+  &.markdown-body pre[class*='language-'] {
+    font-size: 13px;
   }
 `;
