@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 import { MSTProps } from 'stores';
@@ -6,6 +7,8 @@ import { MSTProps } from 'stores';
 // components
 import { Input, Form, Button } from 'components';
 import { AsyncStatus } from 'common/mst';
+import { observer } from 'mobx-react';
+import { Router } from 'next/router';
 
 const initialInput = {
   id: '',
@@ -14,40 +17,59 @@ const initialInput = {
 
 type InitialInput = typeof initialInput;
 
-export const AuthLoginContainer = ({ store }: MSTProps): JSX.Element => {
-  const { authStore } = store;
-  const { login } = authStore;
+export const AuthLoginContainer = observer(
+  ({ store }: MSTProps): JSX.Element => {
+    const router = useRouter();
 
-  const [input, setInput] = useState<InitialInput>(initialInput);
+    const { authStore } = store;
+    const { login } = authStore;
 
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
+    const [input, setInput] = useState<InitialInput>(initialInput);
 
-      setInput((input) => ({
-        ...input,
-        [name]: value,
-      }));
-    },
-    [setInput],
-  );
+    const onChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
 
-  const onLogin = useCallback(() => {
-    if (login.status === AsyncStatus.pending) return;
+        setInput((input) => ({
+          ...input,
+          [name]: value,
+        }));
+      },
+      [setInput],
+    );
 
-    const params = { ...input };
-    authStore.onLogin({ params });
-  }, [input, login.status, authStore.onLogin]);
+    const onLogin = useCallback(() => {
+      if (login.status === AsyncStatus.pending) return;
 
-  return (
-    <Form>
-      <Input name="id" placeholder="id" value={input.id} onChange={onChange} />
-      <Input name="password" placeholder="password" value={input.password} onChange={onChange} />
+      const params = { ...input };
+      authStore.onLogin({ params });
+    }, [input, login.status, authStore.onLogin]);
 
-      <LoginButton onClick={onLogin}>로그인</LoginButton>
-    </Form>
-  );
-};
+    useEffect(() => {
+      if (login.status !== AsyncStatus.ready) return null;
+
+      router.push('/');
+      return () => login.onDefault();
+    }, [router, login.status === AsyncStatus.ready]);
+
+    return (
+      <Form>
+        <Input name="id" type="text" placeholder="id" value={input.id} onChange={onChange} />
+        <Input
+          name="password"
+          type="password"
+          placeholder="password"
+          value={input.password}
+          onChange={onChange}
+        />
+
+        <LoginButton onClick={onLogin}>
+          로그인{login.status === AsyncStatus.pending && '중...'}
+        </LoginButton>
+      </Form>
+    );
+  },
+);
 
 const LoginButton = styled(Button)`
   margin-top: auto;

@@ -3,6 +3,11 @@ import { CommentRepository } from 'repository';
 
 import { comments, createComment } from 'common/models';
 
+const onGetComments = (self, props) => {
+  const { post } = props;
+  self.onGetComments({ id: post.id });
+};
+
 export const CommentStore = types
   .model('CommentStore', {
     comments,
@@ -12,7 +17,9 @@ export const CommentStore = types
     onGetComments: (props?) =>
       self.comments.onGetAll(() => CommentRepository.onGetComments(props), 'comments'),
     onCreateComment: (props?) =>
-      self.createComment.onCreate(() => CommentRepository.onCreateComment(props)),
+      self.createComment.onCreate(() => CommentRepository.onCreateComment(props), null, {
+        actions: { ready: (props) => onGetComments(self, props) },
+      }),
   }));
 
 const commentStore = CommentStore.create({});

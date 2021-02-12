@@ -16,6 +16,8 @@ export const PostStore = types
     onGetMorePosts: (props?) =>
       self.posts.onGetAll(() => PostRepository.onGetPosts(props), 'posts', { isMore: true }),
     onGetPost: (props?) => self.post.onGetOne(() => PostRepository.onGetPost(props), 'post'),
+    onCreatePost: (props?) =>
+      self.createPost.onCreate(() => PostRepository.onCreatePost(props), 'post'),
   }));
 
 const postStore = PostStore.create();

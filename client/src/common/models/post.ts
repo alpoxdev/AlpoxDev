@@ -11,13 +11,13 @@ export const Post = types.model('Post', {
   public: types.maybe(types.boolean),
   createdAt: types.maybe(types.string),
 
-  user: types.optional(types.maybe(User), undefined),
+  user: types.optional(types.maybe(types.maybeNull(User)), null),
   comments: types.optional(types.array(Comment), []),
 });
 
 export const posts = createAsyncModels('Posts', Post);
 export const post = createAsyncModel('Post', Post);
-export const createPost = createAsyncModel('create', EmptyModel);
+export const createPost = createAsyncModel('create', Post);
 export const deletePost = createAsyncModel('delete', EmptyModel);
 export const updatePost = createAsyncModel('update', EmptyModel);
 

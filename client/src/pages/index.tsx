@@ -13,16 +13,16 @@ import { Introduce } from 'components';
 import { deleteUndefinedInStore } from 'utils';
 
 const IndexPage = ({ store }: MSTProps): JSX.Element => {
-  const { postStore, tagStore } = store;
+  const { postStore } = store;
+  const { posts } = postStore;
 
   const onGetInit = useCallback(() => {
-    if (postStore.posts.status !== AsyncStatus.ready) postStore.onGetPosts({});
-    if (tagStore.tags.status !== AsyncStatus.ready) tagStore.onGetTags({});
-  }, [postStore.posts.status, tagStore.tags.status]);
+    if (!posts.isReady) postStore.onGetPosts({});
+  }, [posts.isReady]);
 
   useEffect(() => {
     onGetInit();
-  }, [onGetInit]);
+  }, [onGetInit, posts.isReady]);
 
   return (
     <>

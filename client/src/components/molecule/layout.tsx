@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 import { Text } from 'components';
 import { FontSize } from 'common/theme';
@@ -11,8 +12,14 @@ import { AsyncStatus } from 'common/mst';
 
 // components
 import { Modal } from 'components';
+import { UserProfile } from './userProfile';
+
+// utils
+import { onGetUserData } from 'utils';
 
 export const Layout = ({ children }) => {
+  const { user, accessToken } = onGetUserData();
+
   const store = useStore();
   const { tagStore } = store;
   const { tags } = tagStore;
@@ -32,6 +39,8 @@ export const Layout = ({ children }) => {
           <Link href="/">
             <Logo fontSize={FontSize.title}>AlpoxDev</Logo>
           </Link>
+
+          <UserProfile src={user?.profile} css={UserProfileCSS} />
         </LayoutHeader>
       </LayoutHeaderWrapper>
 
@@ -88,4 +97,9 @@ const LayoutContent = styled.div`
   @media (max-width: 1080px) {
     width: 100%;
   }
+`;
+
+const UserProfileCSS = css`
+  margin-left: auto;
+  border: 1px solid #eaeaea;
 `;

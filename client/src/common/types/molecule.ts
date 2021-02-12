@@ -1,3 +1,4 @@
+import { SerializedStyles } from '@emotion/react';
 import { IModal } from 'common/models';
 import { SkeletonThemeProps } from 'react-loading-skeleton';
 
@@ -14,4 +15,11 @@ export interface SkeletonProps extends SkeletonThemeProps {
   width: number;
   height: number;
   circle?: boolean;
+}
+
+export interface UserProfileProps {
+  src?: string;
+  width?: string;
+  height?: string;
+  css?: SerializedStyles;
 }

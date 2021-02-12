@@ -1,8 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 import queryString from 'query-string';
-import { isSSR } from 'utils';
+import { isSSR, onCreateAxiosInstanceWithToken } from 'utils';
 
-const ENDPOINT = 'https://e2ymj1zrwk.execute-api.ap-northeast-2.amazonaws.com/dev';
+// const ENDPOINT = 'https://e2ymj1zrwk.execute-api.ap-northeast-2.amazonaws.com/dev';
+const ENDPOINT = 'http://localhost:8080';
 let instance = axios.create({});
 
 export type Header = { [type: string]: string };
@@ -55,6 +56,8 @@ export const onRequest = async (props: RequestProps): Promise<Response> => {
   const { method } = props;
   props = { ...props, url: ENDPOINT + props.url };
   !isSSR() && console.log('onRequest', props);
+
+  instance = onCreateAxiosInstanceWithToken();
 
   let response: Response;
 

@@ -4,7 +4,7 @@ import { login, register } from 'common/models';
 import { onRefreshAxios } from 'common/axios';
 import { IStore } from 'stores';
 
-import { onParseJWT, onCreateAxiosInstanceWithToken } from 'utils';
+import { onParseJWT, onSetUserData } from 'utils';
 
 const onLogined = (self, props: any): void => {
   const rootStore: IStore = getParent(self);
@@ -15,7 +15,7 @@ const onLogined = (self, props: any): void => {
   if (accessToken) user = onParseJWT(accessToken);
   if (accessToken) userStore.setLogined(accessToken || null, user);
 
-  onRefreshAxios(onCreateAxiosInstanceWithToken(accessToken));
+  onSetUserData(accessToken, user);
 };
 
 export const AuthStore = types

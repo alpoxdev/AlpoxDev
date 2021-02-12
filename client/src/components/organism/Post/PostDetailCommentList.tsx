@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 
-import { Text, Button } from 'components';
+import { Text, Button, UserProfile } from 'components';
 
 import { CommentListProps, CommentProps } from 'common/types';
 import { IComment } from 'common/models';
@@ -11,7 +11,7 @@ const PostDetailCommentList = ({
   onCreateComment,
   isCreatePending,
 }: CommentListProps): JSX.Element => {
-  const [comment, setComment] = useState<string>('');
+  const [content, setContent] = useState<string>('');
 
   const commentList = comments.map((comment: IComment) => (
     <PostDetailCommentItem key={comment.id} comment={comment} />
@@ -21,28 +21,29 @@ const PostDetailCommentList = ({
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const { value } = e.target;
 
-      setComment(value);
+      setContent(value);
     },
-    [comment],
+    [content],
   );
 
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
-      onCreateComment(comment);
+      setContent('');
+      onCreateComment(content);
     },
-    [comment, onCreateComment],
+    [content, onCreateComment],
   );
 
   const onCancel = useCallback(() => {
-    setComment('');
-  }, [comment, setComment]);
+    setContent('');
+  }, [content, setContent]);
 
   return (
     <CommentListWrapper>
       <CommentForm onSubmit={onSubmit}>
-        <CommentInput placeholder="댓글을 작성해주세요..." value={comment} onChange={onChange} />
+        <CommentInput placeholder="댓글을 작성해주세요..." value={content} onChange={onChange} />
         <ButtonWrapper>
           <CommentButton isAuto primary onClick={onSubmit}>
             작성{isCreatePending && '중...'}
@@ -58,10 +59,14 @@ const PostDetailCommentList = ({
 };
 
 const PostDetailCommentItem = ({ comment }: CommentProps): JSX.Element => {
+  console.log(comment);
   return (
     <CommentItem>
-      {JSON.stringify(comment)}
-      <Content>{comment.name}</Content>
+      <UserWrapper>
+        <UserProfile src={comment.user?.profile} />
+        <Name>{comment.user?.nickname}</Name>
+      </UserWrapper>
+      <Content>{comment.content}</Content>
     </CommentItem>
   );
 };
@@ -98,12 +103,12 @@ const ButtonWrapper = styled.div`
   align-items: center;
 `;
 
-const CommentButton = styled(Button)``;
-
-const CancelButton = styled(Button)`
+const CommentButton = styled(Button)`
   margin-left: auto;
   margin-right: 7px;
 `;
+
+const CancelButton = styled(Button)``;
 
 const CommentList = styled.div`
   margin-top: 25px;
@@ -112,6 +117,16 @@ const CommentList = styled.div`
 const CommentItem = styled.div`
   padding: 10px 0;
   border-bottom: 1px solid #eaeaea;
+`;
+
+const UserWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Name = styled(Text)`
+  margin-left: 5px;
+  font-weight: 600;
 `;
 
 const Content = styled(Text)`

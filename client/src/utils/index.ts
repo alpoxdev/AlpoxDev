@@ -9,6 +9,7 @@ import html from 'rehype-stringify';
 import jwtDecode from 'jwt-decode';
 
 import { IStore } from 'stores';
+import { IUser } from 'common/models';
 
 export const isSSR = () => {
   return typeof window === 'undefined';
@@ -60,8 +61,30 @@ export const onParseJWT = (accessToken: string): any => {
   return jwtDecode(accessToken);
 };
 
-export const onCreateAxiosInstanceWithToken = (accessToken: string): AxiosInstance => {
+export const onCreateAxiosInstanceWithToken = (): AxiosInstance => {
+  const { accessToken } = onGetUserData();
+
   return axios.create({
     headers: { Authorization: `Bearer ${accessToken}` },
   });
+};
+
+export const onSetUserData = (accessToken: string, user: IUser): void => {
+  if (isSSR()) return;
+
+  localStorage.setItem('@user', JSON.stringify(user));
+  localStorage.setItem('@accessToken', accessToken);
+
+  console.log('onSetUserData', accessToken, user);
+};
+
+export const onGetUserData = (): { user?: any; accessToken?: string | null } => {
+  if (isSSR()) return { user: null, accessToken: null };
+
+  const userString: string = localStorage.getItem('@user');
+
+  return {
+    user: JSON.parse(userString) || null,
+    accessToken: localStorage.getItem('@accessToken') || null,
+  };
 };

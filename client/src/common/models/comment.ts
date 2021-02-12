@@ -6,7 +6,7 @@ export const Comment = types.model('Comment', {
   id: types.maybe(types.number),
   content: types.maybe(types.string),
   name: types.maybe(types.string),
-  user: types.maybe(types.maybeNull(User)),
+  user: types.optional(types.maybe(types.maybeNull(User)), null),
   createdAt: types.maybe(types.string),
   updatedAt: types.maybe(types.string),
 });

@@ -1,60 +1,73 @@
-import React, { useCallback, useState } from 'react';
-// import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 
 // stores
+import { observer } from 'mobx-react';
 import { MSTProps } from 'stores';
 import { AsyncStatus } from 'common/mst';
 
 // components
 import { PostCreatePreview, PostCreateTextarea, Button } from 'components';
 
-export const PostCreateContainer = ({ store }: MSTProps): JSX.Element => {
-  const { postStore } = store;
-  const { createPost } = postStore;
+export const PostCreateContainer = observer(
+  ({ store }: MSTProps): JSX.Element => {
+    const router = useRouter();
 
-  const [content, setContent] = useState<string>('');
+    const { postStore } = store;
+    const { createPost } = postStore;
 
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const { value } = e.target;
-      setContent(value);
-    },
-    [content, setContent],
-  );
+    const [content, setContent] = useState<string>('');
 
-  const onCreate = useCallback(() => {
-    if (createPost.status === AsyncStatus.pending) return;
+    const onChange = useCallback(
+      (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const { value } = e.target;
+        setContent(value);
+      },
+      [content, setContent],
+    );
 
-    console.log('createPost', content);
-  }, [content, createPost.status]);
+    const onCreate = useCallback(() => {
+      if (createPost.status === AsyncStatus.pending) return;
 
-  const onCancel = useCallback(() => {
-    setContent('');
-  }, [setContent]);
+      const params = { title: 'createPost test', subtitle: 'subtitle', content };
+      postStore.onCreatePost({ params });
+    }, [content, createPost.status, postStore.createPost]);
 
-  return (
-    <PostCreateContainerWrapper>
-      <TopSection>
-        <LeftSection>
-          <PostCreateTextarea value={content} onChange={onChange} />
-        </LeftSection>
-        <RightSection>
-          <PostCreatePreview content={content} />
-        </RightSection>
-      </TopSection>
+    const onCancel = useCallback(() => {
+      setContent('');
+    }, [setContent]);
 
-      <BottomSection>
-        <SaveButton isAuto primary onClick={onCreate}>
-          작성{createPost.status === AsyncStatus.pending && '중...'}
-        </SaveButton>
-        <CancelButton isAuto onClick={onCancel}>
-          취소
-        </CancelButton>
-      </BottomSection>
-    </PostCreateContainerWrapper>
-  );
-};
+    useEffect(() => {
+      if (createPost.status !== AsyncStatus.ready) return;
+
+      router.push(`/posts/${createPost.data?.id}`);
+      createPost.onDefault();
+    }, [createPost.status === AsyncStatus.ready]);
+
+    return (
+      <PostCreateContainerWrapper>
+        <TopSection>
+          <LeftSection>
+            <PostCreateTextarea value={content} onChange={onChange} />
+          </LeftSection>
+          <RightSection>
+            <PostCreatePreview content={content} />
+          </RightSection>
+        </TopSection>
+
+        <BottomSection>
+          <SaveButton isAuto primary onClick={onCreate}>
+            작성{createPost.status === AsyncStatus.pending && '중...'}
+          </SaveButton>
+          <CancelButton isAuto onClick={onCancel}>
+            취소
+          </CancelButton>
+        </BottomSection>
+      </PostCreateContainerWrapper>
+    );
+  },
+);
 
 const PostCreateContainerWrapper = styled.div`
   width: 100%;

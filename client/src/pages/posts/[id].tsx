@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 // stores
 import { inject, observer } from 'mobx-react';
 import { initializeStore, MSTProps } from 'stores';
-import { AsyncStatus } from 'common/mst';
 
 // helmet
 import { Helmet } from 'components';
@@ -20,12 +19,14 @@ const PostDetailPage = ({ store }: MSTProps): JSX.Element => {
   const router = useRouter();
   const id = router.query?.id;
 
-  const { postStore } = store;
+  const { postStore, commentStore } = store;
   const { post } = postStore;
+  const { comments } = commentStore;
 
   const onGetPost = useCallback(() => {
-    if (post.status !== AsyncStatus.ready) postStore.onGetPost({ id });
-  }, [id, post.status]);
+    if (!post.isReady) postStore.onGetPost({ id });
+    if (!comments.isReady) commentStore.onGetComments({ id });
+  }, [id, post.isReady, comments.isReady]);
 
   useEffect(() => {
     onGetPost();
@@ -53,9 +54,9 @@ export async function getServerSideProps({ params }) {
   const { id } = params;
 
   const store = initializeStore();
-  const { postStore } = store;
+  const { postStore, commentStore } = store;
 
-  await postStore.onGetPost({ id });
+  await Promise.all([postStore.onGetPost({ id }), commentStore.onGetComments({ id })]);
 
   return { props: { initialState: deleteUndefinedInStore(store) } };
 }
