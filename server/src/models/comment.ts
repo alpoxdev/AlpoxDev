@@ -12,7 +12,7 @@ import { User } from './user';
 @Table({ tableName: 'comment' })
 export class Comment extends Model {
     @Column(DataType.TEXT)
-    name: string;
+    content: string;
 
     @ForeignKey(() => User)
     @Column

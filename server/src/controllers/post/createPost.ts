@@ -27,6 +27,7 @@ export const onCreatePost = createGatewayProxyHandler(
             subtitle,
             content,
             user,
+            userId: user.id,
             category: categoryId ?? (await Category.findByPk(categoryId)),
             series: seriesId ?? (await Series.findByPk(seriesId)),
             tags: tags

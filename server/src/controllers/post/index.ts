@@ -5,6 +5,7 @@ export * from './deletePost';
 export * from './updatePost';
 export * from './likePost';
 export * from './dislikePost';
+export * from './getComments';
 export * from './createComment';
 export * from './deleteComment';
 export * from './updateComment';
