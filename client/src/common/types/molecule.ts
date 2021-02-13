@@ -8,13 +8,19 @@ export interface ModalItemProps {
 }
 
 export interface SkeletonProps extends SkeletonThemeProps {
-  children?: React.ReactNode | React.ReactNode;
-
-  view?: boolean;
-
   width: number;
   height: number;
   circle?: boolean;
+  count?: number;
+}
+
+export interface SkeletonListProps extends SkeletonThemeProps {
+  widths: number[];
+  height: number;
+  circle?: boolean;
+  count?: number;
+  css?: SerializedStyles;
+  duration?: number;
 }
 
 export interface UserProfileProps {
@@ -22,4 +28,18 @@ export interface UserProfileProps {
   width?: string;
   height?: string;
   css?: SerializedStyles;
+  onMouseHover?: () => void;
+}
+
+export type DropdownItemProps = {
+  id?: number;
+  content: string;
+  onClick?: () => void;
+};
+export interface DropdownProps {
+  children?: JSX.Element | JSX.Element[];
+  view: boolean;
+  css?: SerializedStyles;
+  items?: DropdownItemProps[];
+  onMouseOver?: () => void;
 }

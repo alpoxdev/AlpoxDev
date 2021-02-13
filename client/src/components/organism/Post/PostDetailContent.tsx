@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 import Prism from 'prismjs';
 import { onParseMarkdown } from 'utils';
 
+import { SkeletonList } from 'components';
+
 import 'prismjs/components/prism-bash.min.js'; // bash
 import 'prismjs/components/prism-json.min.js'; // json
 
@@ -47,10 +49,17 @@ export default class PostDetailContent extends Component<{ content: string }> {
             crossOrigin="anonymous"
           />
         </Head>
-        <ContentDiv
-          className="markdown-body"
-          dangerouslySetInnerHTML={{ __html: onParseMarkdown(content) }}
-        />
+        {content && (
+          <ContentDiv
+            className="markdown-body"
+            dangerouslySetInnerHTML={{ __html: onParseMarkdown(content) }}
+          />
+        )}
+        {!content && (
+          <ContentDiv>
+            <SkeletonList widths={[30, 60]} height={20} count={90} />
+          </ContentDiv>
+        )}
       </>
     );
   }

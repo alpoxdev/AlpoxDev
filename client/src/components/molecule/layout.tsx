@@ -11,13 +11,23 @@ import { useStore } from 'stores';
 import { AsyncStatus } from 'common/mst';
 
 // components
-import { Modal } from 'components';
-import { UserProfile } from './userProfile';
+import { Modal, UserProfile, Dropdown } from 'components';
 
 // utils
 import { onGetUserData } from 'utils';
 
+// hooks
+import { useMouseHover } from 'hooks';
+
+const DropdownItems = [
+  {
+    id: 1,
+    content: '로그아웃',
+  },
+];
+
 export const Layout = ({ children }) => {
+  const { hover, onMouseHover } = useMouseHover();
   const { user, accessToken } = onGetUserData();
 
   const store = useStore();
@@ -25,12 +35,12 @@ export const Layout = ({ children }) => {
   const { tags } = tagStore;
 
   const onGetTags = useCallback(() => {
-    if (tags.status !== AsyncStatus.ready) tagStore.onGetTags({});
-  }, [tags.status]);
+    if (!tags.isReady) tagStore.onGetTags({});
+  }, [tags.isReady]);
 
   useEffect(() => {
     onGetTags();
-  }, [onGetTags]);
+  }, [tags.isReady, onGetTags]);
 
   return (
     <LayoutWrapper>
@@ -40,7 +50,16 @@ export const Layout = ({ children }) => {
             <Logo fontSize={FontSize.title}>AlpoxDev</Logo>
           </Link>
 
-          <UserProfile src={user?.profile} css={UserProfileCSS} />
+          {accessToken && (
+            <UserProfile src={user?.profile} css={UserProfileCSS} onMouseHover={onMouseHover} />
+          )}
+
+          <Dropdown
+            view={hover}
+            css={DropdownCSS}
+            items={DropdownItems}
+            onMouseOver={onMouseHover}
+          />
         </LayoutHeader>
       </LayoutHeaderWrapper>
 
@@ -74,8 +93,11 @@ const LayoutHeaderWrapper = styled.div`
 
 const LayoutHeader = styled.div`
   width: 1080px;
+  height: 64px;
   margin: 0 auto;
   padding: 0 21px;
+
+  position: relative;
 
   display: flex;
   align-items: center;
@@ -102,4 +124,9 @@ const LayoutContent = styled.div`
 const UserProfileCSS = css`
   margin-left: auto;
   border: 1px solid #eaeaea;
+`;
+
+const DropdownCSS = css`
+  top: 50px;
+  right: 21px;
 `;

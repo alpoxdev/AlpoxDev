@@ -47,23 +47,20 @@ export const PostCreateContainer = observer(
 
     return (
       <PostCreateContainerWrapper>
-        <TopSection>
-          <LeftSection>
-            <PostCreateTextarea value={content} onChange={onChange} />
-          </LeftSection>
-          <RightSection>
-            <PostCreatePreview content={content} />
-          </RightSection>
-        </TopSection>
-
-        <BottomSection>
-          <SaveButton isAuto primary onClick={onCreate}>
-            작성{createPost.status === AsyncStatus.pending && '중...'}
-          </SaveButton>
-          <CancelButton isAuto onClick={onCancel}>
-            취소
-          </CancelButton>
-        </BottomSection>
+        <LeftSection>
+          <PostCreateTextarea value={content} onChange={onChange} />
+          <BottomSection>
+            <SaveButton isAuto primary onClick={onCreate}>
+              작성{createPost.status === AsyncStatus.pending && '중...'}
+            </SaveButton>
+            <CancelButton isAuto onClick={onCancel}>
+              취소
+            </CancelButton>
+          </BottomSection>
+        </LeftSection>
+        <RightSection>
+          <PostCreatePreview content={content} />
+        </RightSection>
       </PostCreateContainerWrapper>
     );
   },
@@ -71,16 +68,29 @@ export const PostCreateContainer = observer(
 
 const PostCreateContainerWrapper = styled.div`
   width: 100%;
+  height: calc(100% - 64px);
+  overflow-y: scroll;
 
   position: absolute;
   top: 64px;
   left: 0;
   right: 0;
+
+  display: flex;
 `;
 
-const TopSection = styled.section`
-  display: flex;
-  align-items: center;
+const Section = styled.section`
+  width: 50%;
+  height: calc(100vh - 64px);
+
+  overflow-y: scroll;
+`;
+
+const LeftSection = styled(Section)`
+  border-right: 1px solid #eaeaea;
+`;
+const RightSection = styled(Section)`
+  padding: 21px;
 `;
 
 const BottomSection = styled.section`
@@ -90,22 +100,6 @@ const BottomSection = styled.section`
 
   display: flex;
   align-items: center;
-`;
-
-const Section = styled.section`
-  width: 50%;
-  height: calc(100vh - 128px);
-  overflow-y: scroll;
-  padding: 21px;
-`;
-
-const LeftSection = styled(Section)`
-  padding: 0;
-  border-right: 1px solid #eaeaea;
-`;
-
-const RightSection = styled(Section)`
-  background-color: white;
 `;
 
 const SaveButton = styled(Button)`

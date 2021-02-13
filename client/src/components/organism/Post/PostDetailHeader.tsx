@@ -6,21 +6,18 @@ import { PostProps } from 'common/types';
 import { FontSize } from 'common/theme';
 
 const Header = ({ post }: PostProps): JSX.Element => {
-  //   post = null;
   return (
     <>
       <HeaderWrapper>
-        <Skeleton width={200} height={45} view={!post}>
-          <Title fontSize={FontSize.title}>{post?.title}</Title>
-        </Skeleton>
+        <Title fontSize={FontSize.title}>
+          {post ? post?.title : <Skeleton width={300} height={45} />}
+        </Title>
       </HeaderWrapper>
 
       <UserWrapper>
-        <Skeleton width={30} height={30} circle view={!post}>
-          <Profile src="/logo.png" />
-        </Skeleton>
+        {post ? <Profile src="/logo.png" /> : <Skeleton circle width={30} height={30} />}
 
-        <Name>{post?.user?.nickname}</Name>
+        <Name>{post ? post?.user?.nickname : <Skeleton width={80} height={20} />}</Name>
       </UserWrapper>
     </>
   );
@@ -47,9 +44,10 @@ const Title = styled(Text)`
 const Profile = styled.img`
   width: 30px;
   height: 30px;
-  margin-right: 5px;
   border-radius: 50%;
   border: 1px solid #eaeaea;
 `;
 
-const Name = styled(Text)``;
+const Name = styled(Text)`
+  margin-left: 5px;
+`;

@@ -3,8 +3,23 @@ import { SerializedStyles } from '@emotion/react';
 
 import { UserProfileProps } from 'common/types';
 
-export const UserProfile = ({ src, width, height, css }: UserProfileProps): JSX.Element => {
-  return <ProfileImage src={src || '/logo.png'} width={width} height={height} css={css} />;
+export const UserProfile = ({
+  src,
+  width,
+  height,
+  css,
+  onMouseHover = () => {},
+}: UserProfileProps): JSX.Element => {
+  return (
+    <ProfileImage
+      src={src || '/logo.png'}
+      width={width}
+      height={height}
+      css={css}
+      onMouseOver={onMouseHover}
+      onClick={onMouseHover}
+    />
+  );
 };
 
 const ProfileImage = styled.img<{ width?: string; height?: string; css: SerializedStyles }>`

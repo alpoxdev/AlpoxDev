@@ -59,7 +59,6 @@ const PostDetailCommentList = ({
 };
 
 const PostDetailCommentItem = ({ comment }: CommentProps): JSX.Element => {
-  console.log(comment);
   return (
     <CommentItem>
       <UserWrapper>

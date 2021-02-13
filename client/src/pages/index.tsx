@@ -3,14 +3,13 @@ import { useCallback, useEffect } from 'react';
 // stores
 import { inject, observer } from 'mobx-react';
 import { initializeStore, MSTProps } from 'stores';
-import { AsyncStatus } from 'common/mst';
 
 // containers and components
 import { PostListContainer } from 'containers';
 import { Introduce } from 'components';
 
 // utils
-import { deleteUndefinedInStore } from 'utils';
+import { isSSR, deleteUndefinedInStore } from 'utils';
 
 const IndexPage = ({ store }: MSTProps): JSX.Element => {
   const { postStore } = store;
@@ -34,10 +33,9 @@ const IndexPage = ({ store }: MSTProps): JSX.Element => {
 
 export async function getServerSideProps() {
   const store = initializeStore();
-  const { postStore, tagStore } = store;
+  const { postStore } = store;
 
-  await postStore.onGetPosts({});
-  await tagStore.onGetTags({});
+  isSSR() && (await postStore.onGetPosts({}));
 
   return { props: { initialState: deleteUndefinedInStore(store) } };
 }

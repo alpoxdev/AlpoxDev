@@ -32,13 +32,6 @@ export const PostDetailContainer = observer(
     }, [postId, commentStore.onGetComments, commentStore.createComment.status]);
 
     useEffect(() => {
-      if (createComment.isReady) {
-        onGetComments();
-        createComment.onDefault();
-      }
-    }, [createComment.status]);
-
-    useEffect(() => {
       return () => {
         comments.onDefault();
       };

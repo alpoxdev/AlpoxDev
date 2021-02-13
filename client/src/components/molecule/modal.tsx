@@ -13,7 +13,7 @@ export const Modal = (): JSX.Element | null => {
   const { modalStore } = store;
   const { modals } = modalStore;
 
-  console.log('ModalStore', modals.toJS());
+  //   console.log('ModalStore', modals.toJS());
 
   const onModalRemove = (id: number) => {
     //   modalStore.onModalRemove(id);
@@ -23,8 +23,6 @@ export const Modal = (): JSX.Element | null => {
       content: 'testtest2',
     } as IModal);
   };
-
-  console.log('rendering');
 
   if (modals.length === 0) return null;
 

@@ -13,7 +13,7 @@ import { customHelmet as helmet } from 'common/helmet';
 import { PostDetailContainer } from 'containers';
 
 // utils
-import { deleteUndefinedInStore } from 'utils';
+import { isSSR, deleteUndefinedInStore } from 'utils';
 
 const PostDetailPage = ({ store }: MSTProps): JSX.Element => {
   const router = useRouter();
@@ -56,7 +56,7 @@ export async function getServerSideProps({ params }) {
   const store = initializeStore();
   const { postStore, commentStore } = store;
 
-  await Promise.all([postStore.onGetPost({ id }), commentStore.onGetComments({ id })]);
+  isSSR() && (await Promise.all([postStore.onGetPost({ id }), commentStore.onGetComments({ id })]));
 
   return { props: { initialState: deleteUndefinedInStore(store) } };
 }
