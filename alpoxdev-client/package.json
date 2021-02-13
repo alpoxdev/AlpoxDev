@@ -10,7 +10,7 @@
         "clear": "rm -rf .next && rm -rf .serverless && rm -rf .serverless_nextjs"
     },
     "dependencies": {
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "disqus-react": "1.0.10",
         "immutable": "4.0.0-rc.12",
         "jwt-decode": "3.0.0-beta.2",
