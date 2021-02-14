@@ -2,20 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
-import { Text } from 'components';
+import { Text, Footer } from 'components';
 import { IPost } from 'common/models';
 import { FontSize } from 'common/theme';
 import { onGetDateFormat } from 'utils';
 
 interface IPostList {
   posts: IPost[];
+  onGetMorePosts: () => void;
 }
 
 interface IPostItem {
   post: IPost;
 }
 
-const List = ({ posts }: IPostList) => {
+const List = ({ posts, onGetMorePosts }: IPostList) => {
   const postList = posts.map((post: IPost, index: number) => <PostItem key={index} post={post} />);
 
   return <PostListView>{postList}</PostListView>;

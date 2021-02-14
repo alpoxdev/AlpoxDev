@@ -36,6 +36,13 @@ const PostDetailPage = ({ store }: MSTProps): JSX.Element => {
     return () => post.onDefault();
   }, []);
 
+  useEffect(() => {
+    if (post.isError) {
+      router.replace('/posts');
+      return () => post.onDefault();
+    }
+  }, [post.isError]);
+
   return (
     <>
       <Helmet

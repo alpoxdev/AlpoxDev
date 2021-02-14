@@ -143,7 +143,7 @@ export function AsyncModels<T extends IAnyModelType>(
         self.status = AsyncStatus.ready;
         self.error = null;
         self.data = data;
-        self.skip = 0;
+        self.skip = total >= 20 ? 20 : data.length;
         self.take = 20;
         self.total = total;
       },

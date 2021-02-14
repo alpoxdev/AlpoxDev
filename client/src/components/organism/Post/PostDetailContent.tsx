@@ -57,7 +57,9 @@ export default class PostDetailContent extends Component<{ content: string }> {
         )}
         {!content && (
           <ContentDiv>
-            <SkeletonList widths={[30, 60]} height={20} count={90} />
+            <SkeletonList widths={[30, 60]} height={20} count={60} />
+            <SkeletonList widths={[30, 60]} height={20} count={40} />
+            <SkeletonList widths={[30, 60]} height={20} count={50} />
           </ContentDiv>
         )}
       </>
@@ -67,6 +69,16 @@ export default class PostDetailContent extends Component<{ content: string }> {
 
 const ContentDiv = styled.div`
   margin-top: 30px;
+
+  ol,
+  ul {
+    list-style-type: disc;
+  }
+
+  pre {
+    background-color: #2d2d2d;
+    color: #ccc;
+  }
 
   &.markdown-body {
     font-size: 14px;

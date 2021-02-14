@@ -16,12 +16,14 @@ const IndexPage = ({ store }: MSTProps): JSX.Element => {
   const { posts } = postStore;
 
   const onGetInit = useCallback(() => {
-    if (!posts.isReady) postStore.onGetPosts({});
-  }, [posts.isReady]);
+    if (posts.total === 0) {
+      postStore.onGetPosts({});
+    }
+  }, [posts.total]);
 
   useEffect(() => {
     onGetInit();
-  }, [onGetInit, posts.isReady]);
+  }, [onGetInit]);
 
   return (
     <>

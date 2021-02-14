@@ -5,6 +5,7 @@ import { PostCreateTextAreaProps } from 'common/types';
 const CreateTextarea = ({ value, onChange }: PostCreateTextAreaProps): JSX.Element => {
   return (
     <Textarea
+      name="content"
       value={value}
       onChange={onChange}
       placeholder="내용을 작성하지 않으면 유혈사태가 일어날것입니다..."
@@ -15,10 +16,13 @@ const CreateTextarea = ({ value, onChange }: PostCreateTextAreaProps): JSX.Eleme
 export default CreateTextarea;
 
 const Textarea = styled.textarea`
+  flex: 1;
   width: 100%;
-  min-height: calc(100vh - 128px);
   padding: 21px;
+  padding-top: 10px;
   background-color: transparent;
+
+  overflow-y: scroll;
 
   display: block;
 

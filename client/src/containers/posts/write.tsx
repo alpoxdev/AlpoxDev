@@ -8,7 +8,18 @@ import { MSTProps } from 'stores';
 import { AsyncStatus } from 'common/mst';
 
 // components
-import { PostCreatePreview, PostCreateTextarea, Button } from 'components';
+import { PostCreatePreview, PostCreateTextarea, Button, PostCreateHeader } from 'components';
+
+// types
+import { CreatePostInput } from 'common/types';
+
+const initInput: CreatePostInput = {
+  title: '',
+  subtitle: '',
+  content: '',
+  tagInput: '',
+  tags: [],
+};
 
 export const PostCreateContainer = observer(
   ({ store }: MSTProps): JSX.Element => {
@@ -17,26 +28,43 @@ export const PostCreateContainer = observer(
     const { postStore } = store;
     const { createPost } = postStore;
 
-    const [content, setContent] = useState<string>('');
+    const [input, setInput] = useState<CreatePostInput>(initInput);
 
     const onChange = useCallback(
       (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { value } = e.target;
-        setContent(value);
+        const { name, value } = e.target;
+
+        setInput((state: CreatePostInput) => ({
+          ...state,
+          [name]: value,
+        }));
       },
-      [content, setContent],
+      [input, setInput],
+    );
+
+    const onTagEnter = useCallback(
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+          setInput((state: CreatePostInput) => ({
+            ...state,
+            tagInput: '',
+            tags: [...state.tags, state.tagInput],
+          }));
+        }
+      },
+      [setInput, input.tagInput, input.tags],
     );
 
     const onCreate = useCallback(() => {
       if (createPost.status === AsyncStatus.pending) return;
 
-      const params = { title: 'createPost test', subtitle: 'subtitle', content };
+      const params = { ...input };
       postStore.onCreatePost({ params });
-    }, [content, createPost.status, postStore.createPost]);
+    }, [input, createPost.status, postStore.createPost]);
 
     const onCancel = useCallback(() => {
-      setContent('');
-    }, [setContent]);
+      setInput(initInput);
+    }, [setInput]);
 
     useEffect(() => {
       if (createPost.status !== AsyncStatus.ready) return;
@@ -45,10 +73,14 @@ export const PostCreateContainer = observer(
       createPost.onDefault();
     }, [createPost.status === AsyncStatus.ready]);
 
+    console.log('TagInput', input);
+
     return (
       <PostCreateContainerWrapper>
         <LeftSection>
-          <PostCreateTextarea value={content} onChange={onChange} />
+          <PostCreateHeader input={input} onChange={onChange} onTagEnter={onTagEnter} />
+          <PostCreateTextarea value={input.content} onChange={onChange} />
+
           <BottomSection>
             <SaveButton isAuto primary onClick={onCreate}>
               작성{createPost.status === AsyncStatus.pending && '중...'}
@@ -58,8 +90,9 @@ export const PostCreateContainer = observer(
             </CancelButton>
           </BottomSection>
         </LeftSection>
+
         <RightSection>
-          <PostCreatePreview content={content} />
+          <PostCreatePreview content={input.content} />
         </RightSection>
       </PostCreateContainerWrapper>
     );
@@ -75,6 +108,7 @@ const PostCreateContainerWrapper = styled.div`
   top: 64px;
   left: 0;
   right: 0;
+  z-index: 100;
 
   display: flex;
 `;
@@ -88,6 +122,9 @@ const Section = styled.section`
 
 const LeftSection = styled(Section)`
   border-right: 1px solid #eaeaea;
+
+  display: flex;
+  flex-direction: column;
 `;
 const RightSection = styled(Section)`
   padding: 21px;

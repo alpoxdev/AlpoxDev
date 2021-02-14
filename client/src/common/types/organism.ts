@@ -25,3 +25,17 @@ export interface PostCreateTextAreaProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
+
+export type CreatePostInput = {
+  title: string;
+  subtitle: string;
+  content: string;
+  tagInput: string;
+  tags: string[];
+};
+
+export interface PostCreateHeaderProps {
+  input: CreatePostInput;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onTagEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}

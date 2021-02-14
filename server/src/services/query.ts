@@ -3,8 +3,8 @@ type QueryStringParameters = {
 } | null;
 
 export const parsePageQuery = (query: QueryStringParameters) => {
-    const limit = query?.limit || '20';
-    const offset = query?.offset || '0';
+    const limit = query?.limit || query?.take || '20';
+    const offset = query?.offset || query?.skip || '0';
 
     return {
         limit: parseInt(limit),

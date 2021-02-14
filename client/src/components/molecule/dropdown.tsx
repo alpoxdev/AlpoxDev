@@ -28,8 +28,8 @@ export const Dropdown = ({
 
   return (
     <>
-      <Other onClick={onMouseOver} />
       <DropdownWrapper css={css}>{itemList || children}</DropdownWrapper>
+      <Other onClick={onMouseOver} />
     </>
   );
 };
@@ -40,7 +40,7 @@ const Other = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 991;
 `;
 
 const DropdownWrapper = styled.ul<{ css?: SerializedStyles }>`
@@ -51,7 +51,7 @@ const DropdownWrapper = styled.ul<{ css?: SerializedStyles }>`
 
   border-radius: 4px;
   box-shadow: 3px 2px 14px 3px rgba(0, 0, 0, 0.05);
-  z-index: 2;
+  z-index: 992;
 
   ${(props) => props.css};
 `;

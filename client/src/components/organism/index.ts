@@ -6,4 +6,5 @@ export const PostDetailHeader = dynamic(() => import('./Post/PostDetailHeader'))
 export const PostDetailContent = dynamic(() => import('./Post/PostDetailContent'));
 export const PostDetailCommentList = dynamic(() => import('./Post/PostDetailCommentList'));
 export const PostCreatePreview = dynamic(() => import('./Post/PostCreatePreview'));
+export const PostCreateHeader = dynamic(() => import('./Post/PostCreateHeader'));
 export const PostCreateTextarea = dynamic(() => import('./Post/PostCreateTextarea'));

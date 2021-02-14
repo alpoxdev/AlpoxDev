@@ -49,7 +49,7 @@ export const onRefreshAxios = (axiosInstance: AxiosInstance) => {
 export const onParseQuery = (query?: Query): string => {
   if (!query) return '';
 
-  return queryString.stringify(query);
+  return '?' + queryString.stringify(query);
 };
 
 export const onRequest = async (props: RequestProps): Promise<Response> => {

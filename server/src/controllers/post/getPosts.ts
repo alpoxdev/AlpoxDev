@@ -14,6 +14,7 @@ export const onGetPosts = createGatewayProxyHandler(
             limit,
             offset,
             include: [User, Category, Series, Tag],
+            order: [['createdAt', 'DESC']],
         });
 
         return res({
