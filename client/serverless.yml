@@ -1,0 +1,11 @@
+myNextApplication:
+  component: '@sls-next/serverless-component@latest'
+  inputs:
+    name: blog-client
+    description: https://alpox.dev
+    bucketName: blog-client
+    publicDirectoryCache:
+      value: public, max-age=604800
+      test: /\.(gif|jpe?g|png|txt|xml|pdf)$/i
+    cloudfront:
+      distributionId: EYHI5LA2MDTR1

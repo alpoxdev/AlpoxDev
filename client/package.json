@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "export AWS_PROFILE=default && yarn clear && serverless",
+    "clear": "rm -rf .next && rm -rf .serverless && rm -rf .serverless_nextjs"
   },
   "dependencies": {
     "@emotion/css": "11.1.3",
