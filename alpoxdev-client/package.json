@@ -19,7 +19,7 @@
         "next-aws-lambda": "2.5.1-alpha.0",
         "next-redux-wrapper": "6.0.2",
         "next-seo": "4.7.3",
-        "prismjs": "1.22.0",
+        "prismjs": "1.23.0",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
         "react-redux": "7.2.1",
