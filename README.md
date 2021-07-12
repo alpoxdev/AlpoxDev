@@ -12,5 +12,5 @@
 
 ![React](https://img.shields.io/badge/React-5F00FF) ![Nodejs](https://img.shields.io/badge/Nodejs-43853d) ![javascript](https://img.shields.io/badge/Javascript-FFE400) ![typescript](https://img.shields.io/badge/Typescript-0054FF)
 
-[![AlpoxDev's github stats](https://github-readme-stats.vercel.app/api?username=AlpoxDev)](https://github.com/AlpoxDev)
+[![AlpoxDev's github stats](https://github-readme-stats.vercel.app/api?username=AlpoxDev&theme=algolia)](https://github.com/AlpoxDev)
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=AlpoxDev&layout=compact&theme=algolia)
