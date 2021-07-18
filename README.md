@@ -10,3 +10,5 @@
 
 [![AlpoxDev's github stats](https://github-readme-stats.vercel.app/api?username=AlpoxDev&theme=algolia)](https://github.com/AlpoxDev)
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=AlpoxDev&layout=compact&theme=algolia)
+
+![](https://raw.githubusercontent.com/AlpoxDev/AlpoxDev/output/github-contribution-grid-snake.svg)
