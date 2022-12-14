@@ -2,7 +2,11 @@
 
 ![](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FAlpoxDev)
 
-어플리케이션부터 프론트엔드, 백엔드, 인프라 모두 관심이 많으며 실 서비스를 만드는데 관심이 많은 프로그래머입니다.
+(주)퓨저블 대표 양민열입니다.
+
+- React
+- React Native
+- Node.js
 
 ## Tech Stack
 
@@ -10,5 +14,3 @@
 
 [![AlpoxDev's github stats](https://github-readme-stats.vercel.app/api?username=AlpoxDev&theme=algolia)](https://github.com/AlpoxDev)
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=AlpoxDev&layout=compact&theme=algolia)
-
-![](https://raw.githubusercontent.com/AlpoxDev/AlpoxDev/output/github-contribution-grid-snake.svg)
