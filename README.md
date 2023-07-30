@@ -19,16 +19,13 @@
 - Node.js
 - Terraform
 - AWS
-- ETC
 
 ## Field of Interests.
 
 - Platform Development
 - Ecommerce
-- Crypto Currency
+- Quant
 - Marketing
-- FinTech 
-- Other anythings.
 
 ## Contact
 
@@ -38,7 +35,6 @@
 ## Work Experiences
 
 - FUSEBLE Inc. CEO (2021.09 ~ Present)
-- Uptempo Global IT Business Development (2022.01 ~ Present)
 - LGU+ App, Frontend, Backend Freelancer Developer (2021.05 ~ 2021.12)
 - 공일컴퍼니 CTO (2020.08 ~ 2021.05)
 - NextLab Inc. Frontend Freelancer (2020.12 ~2021.01)
