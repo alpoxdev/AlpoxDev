@@ -30,7 +30,6 @@
 ## Contact
 
 - Email: contact@fuseble.com
-- Website: https://fuseble.io
 
 ## Work Experiences
 
