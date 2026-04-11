@@ -1,6 +1,6 @@
 # AlpoxDev
 
-## Techincial Stacks.
+## Techincial Stacks
 
 - React.js
 - React-Native
@@ -8,7 +8,7 @@
 - Terraform
 - AWS
 
-## Field of Interests.
+## Field of Interests
 
 - Platform Development
 - Ecommerce
@@ -26,3 +26,7 @@
 - LGU+ App, Frontend, Backend Freelancer Developer (2021.05 ~ 2021.12)
 - 공일컴퍼니 CTO (2020.08 ~ 2021.05)
 - NextLab Inc. Frontend Freelancer (2020.12 ~2021.01)
+
+### Tokscale
+
+[![Tokscale Stats](https://tokscale.ai/api/embed/<username>/svg)](https://tokscale.ai/u/<username>)
