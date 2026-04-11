@@ -1,5 +1,7 @@
 # AlpoxDev
 
+[![Tokscale Stats](https://tokscale.ai/api/embed/alpoxdev/svg)](https://tokscale.ai/u/alpoxdev)
+
 ## Techincial Stacks
 
 - React.js
@@ -27,6 +29,3 @@
 - 공일컴퍼니 CTO (2020.08 ~ 2021.05)
 - NextLab Inc. Frontend Freelancer (2020.12 ~2021.01)
 
-### Tokscale
-
-[![Tokscale Stats](https://tokscale.ai/api/embed/alpoxdev/svg)](https://tokscale.ai/u/alpoxdev)
