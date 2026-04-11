@@ -29,4 +29,4 @@
 
 ### Tokscale
 
-[![Tokscale Stats](https://tokscale.ai/api/embed/<username>/svg)](https://tokscale.ai/u/<username>)
+[![Tokscale Stats](https://tokscale.ai/api/embed/alpoxdev/svg)](https://tokscale.ai/u/alpoxdev)
