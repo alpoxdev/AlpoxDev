@@ -17,7 +17,7 @@
 
 ## Contact
 
-- Email: dev@kood.kr
+- Email: alpox@kood.kr
 
 ## Work Experiences
 
